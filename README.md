@@ -1,13 +1,17 @@
 ### Lei Zhang
 BS Computer Science, BS Mathematics, University of Minnesota
+
 612-298-6776 || zhan5821@umn.edu || [radiumlzhang.github.io](https://radiumlzhang.github.io/)
 
 ---
 
 ### Education
 **University of Minnesota, Twin Cities**
+
 CUM GPA: 3.686/4.000 || Fall 2017 - May 2021
+
 B.S. in Computer Science || B.S. in Mathematics - Computer Applications Emphasis
+
 Dean's List
 
 ---
@@ -15,21 +19,27 @@ Dean's List
 ### Portfolio
 
 **Perceptual hash algorithm, Game engine plugin**
+
 [PSD2UMG](https://radiumlzhang.github.io/16665365352900.html)
 A Fast UI Build Solution based on *.psd file. 
 
 **Game design and development** 
+
 [Free Casony](https://github.com/RadiumLZhang/CatClub)
+
 Tencent Game Incubication Project. Tencent Minigame Project Gold Award. Tencent Minigame Best Art Award. 2021.
 
 **Rehabilitation Dream**
+
 [Rehabilitation Dream](https://github.com/RadiumLZhang/RehabilitationDream)
 
 **Reinforcement learning, convolutional neural network, neural fitted Q-learning**
+
 [Automating Flappy Bird using Deep Q-Learning](https://radiumlzhang.github.io/Automating_Flappy_Bird_using_Deep_Q-Learning.pdf)
 CSCI 5211 Course Project, University of Minnesota-Twin Cities, 2021.
 
 **System design and development, ${A^*}$ Algorithm**
+
 Bus Simulation
 CSCI 3081 Course Project, University of Minnesota-Twin Cities, 2019.
 
