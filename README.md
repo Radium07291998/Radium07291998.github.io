@@ -1,33 +1,37 @@
-### Lei Zhang 张镭
-BS Computer Science, BS Mathematics
-(+1) 612-298-6776 || (+86) 136066640729
-zhan5821@umn.edu || [radiumlzhang.github.io](https://radiumlzhang.github.io/)
+### Lei Zhang
+BS Computer Science, BS Mathematics, University of Minnesota
+612-298-6776 || zhan5821@umn.edu || [radiumlzhang.github.io](https://radiumlzhang.github.io/)
 
 ---
 
 ### Education
-**University of Minnesota, Twin Cities** || CUM GPA: 3.686/4.000 || Fall 2017 - May 2021 
+**University of Minnesota, Twin Cities**
+CUM GPA: 3.686/4.000 || Fall 2017 - May 2021
 B.S. in Computer Science || B.S. in Mathematics - Computer Applications Emphasis
+Dean's List
 
 ---
 
-### Portfolio (on [radiumlzhang.github.io](https://radiumlzhang.github.io/)) 
+### Portfolio
 
-**PSD2UMG**
+**Perceptual hash algorithm, Game engine plugin**
+[PSD2UMG](https://radiumlzhang.github.io/16665365352900.html)
+A Fast UI Build Solution based on *.psd file. 
 
-
-**Free Casony**
+**Game design and development** 
 [Free Casony](https://github.com/RadiumLZhang/CatClub)
+Tencent Game Incubication Project. Tencent Minigame Project Gold Award. Tencent Minigame Best Art Award. 2021.
 
-**Rehab Dream**
+**Rehabilitation Dream**
 [Rehabilitation Dream](https://github.com/RadiumLZhang/RehabilitationDream)
 
-**Reinforcement Learning**
+**Reinforcement learning, convolutional neural network, neural fitted Q-learning**
 [Automating Flappy Bird using Deep Q-Learning](https://radiumlzhang.github.io/Automating_Flappy_Bird_using_Deep_Q-Learning.pdf)
-University of Minnesota, Twin Cities, CSCI 5211 Course Project
+CSCI 5211 Course Project, University of Minnesota-Twin Cities, 2021.
 
-**Bus Simulation**
-CSCI 3081 Course Project
+**System design and development, ${A^*}$ Algorithm**
+Bus Simulation
+CSCI 3081 Course Project, University of Minnesota-Twin Cities, 2019.
 
 ___
 
@@ -40,13 +44,14 @@ ___
         - Added two new layers, sketching on flowing data glyphs. 
         - Added a new painting interface.
     - **Everyday Science Visualization** 
-        - implement feature dynamic annotation during video playing.
+        - implemented dynamic annotation feature.
         - added additional information data file as metadata into the video file, embedded chapters into the video file.
 
 **Hangzhou Tonghui Technology Co., Ltd.**
 - Software Development Engineer Intern || Hangzhou, China || Oct 2019 - May 2021
-    - collarated with **Zhejiang Hospital** & **Sir Run Run Shaw Hospital**
-    - developed project Reahabilitation Dream
+    - collarated with Zhejiang Hospital & Sir Run Run Shaw Hospital
+    - **Reahabilitation Dream**
+        - ffd
 ---
 
 ### Professional Experiences
@@ -71,7 +76,7 @@ ___
         - develop Maserati Series IP 
         - responsible for game audio using WWise, GCloudVoice, designe audio manage framework to 
         - optimize Lua memory usage in mobile platform
-        - develop UE4 Engine Plugin - PSD2UMG, optimize the designer working flow process from 3 days to 2 hour.
+        - develop Unity/UE4 Engine Plugin - PSD2UI/PSD2UMG, optimize the designer working-flow process from 3 days to 2 hour.
     - TechFuture-NPC-MetaverseAI
         - TO BE CONTINUE
 ---
