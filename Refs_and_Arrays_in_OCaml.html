@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Radium's Website
+  Refs and Arrays in OCaml - Radium's Website
   
   </title>
   
@@ -95,71 +95,36 @@
        
 
  <script type="text/javascript">
-	$(function(){
-		$('#menu_item_index').addClass('is_active');
-	});
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
 </script>
 <div class="row">
-	<div class="large-8 medium-8 columns">
-		<div class="markdown-body home-categories">
-		
-			<div class="article">
-                <a class="clearlink" href="Free_Casonry.html">
-                
-                  <h1>Free Casonry</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ul>
-<li>This is an independent, narrative and storytelling management mobile game based on Unity3D Engine.</li>
-<li>The project is open-sourced on <a href="https://github.com/RadiumLZhang/Free-Casonry">github.com/RadiumLZhang/Free-Casonry</a>.</li>
-</ul>
-<h2><a id="prize" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prize</h2>
-<p>Tencent Minigame Project Gold Award, 2021.<br />
-Tencent Minigame Best Art Award, 2021.</p>
-<h2><a id="overview" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
-<p>Players take on the role of cats and run the Cat Masons. The cats will conspire in the ancient European court to try to overthrow the human regime.<br />
-<figure><img src="media/16682488882823/1.gif" alt="" /></figure><figure><img src="media/16682488882823/2.gif" alt="" /></figure><figure><img src="media/16682488882823/3.gif" alt="" /></figure><figure><img src="media/16682488882823/4.gif" alt="" /></figure><figure><img src="media/16682488882823/5.gif" alt="" /></figure><figure><img src="media/16682488882823/6.gif" alt="" /></figure><figure><img src="media/16682488882823/7.gif" alt="" /></figure><figure><img src="media/16682488882823/8.gif" alt="" /></figure><figure><img src="media/16682488882823/9.gif" alt="" /></figure></p>
-<h2><a id="design" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h2>
-<p>If you are interested in details, please check out <a href="https://radiumlzhang.github.io/Free_Casonry_Design_Summary.pdf">Free Casonry Design Summary</a> here.</p>
-<h2><a id="installation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
-<p><a href="https://github.com/RadiumLZhang/CatClub/releases/tag/v1.0.0">Release Version 1.0.0</a></p>
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Refs and Arrays in OCaml</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">10/20/2022</span>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">11/15/2021</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
-          				   
-                    
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Blogs.html'>Blogs</a></span>
+           
+         
+          <span class="comments">
+            
 
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+            
+          </span>
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="Refs_and_Arrays_in_OCaml.html">
-                
-                  <h1>Refs and Arrays in OCaml</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>For the most part, coding in a functional style (i.e., without side effects) is a &quot;good thing&quot; because it's easier to reason locally about the behavior of the code.  For instance, when we code purely functional queues or stacks, we don't have to worry about a non-local change to a queue or stack.  However, in some situations, it is more efficient or clearer to destructively modify a data structure than to build a new version.  In these situations, we need some form of mutable data structures.</p>
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>For the most part, coding in a functional style (i.e., without side effects) is a &quot;good thing&quot; because it's easier to reason locally about the behavior of the code.  For instance, when we code purely functional queues or stacks, we don't have to worry about a non-local change to a queue or stack.  However, in some situations, it is more efficient or clearer to destructively modify a data structure than to build a new version.  In these situations, we need some form of mutable data structures.</p>
 <p>Like most imperative programming languages, OCaml provides support for mutable data structures, but unlike languages such as C, C++, or Java, they are not the default.  Thus, programmers are encouraged to code purely functionally by default and to only resort to mutable data structures when absolutely necessary.  In addition, unlike imperative languages, OCaml provides no support for mutable variables.  In other words, the value of a variable cannot change in OCaml.  Rather, all mutations must occur through data structures.</p>
 <h2><a id="refs" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Refs</h2>
 <p>There are only two built-in mutable data structures in OCaml:  refs and arrays. OCaml supports imperative programming through the primitive parameterized <code>ref</code> type. A value of type &quot;int ref&quot; is a pointer to a location in memory, where the location in memory contains an integer.  It's analogous to&quot;int*&quot;in C/C++ or&quot;Integer&quot;in Java (but not&quot;int&quot; in Java).   Like lists, refs are polymorphic, so in fact, we can have a ref (i.e., pointer) to a value of any type. </p>
@@ -330,84 +295,43 @@ Memory: (loc1 = 1)
 <p><strong>Disclaimer</strong><br />
 The auther(s) strive for the best but can't make gurantees of accuracy. Read and use the information at your own risk. I’d also love to help if you have any other question, idea or problem.</p>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">10/20/2022</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Blogs.html'>Blogs</a></span>
-          				   
-                    
 
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+    
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="PSD2UMG.html">
-                
-                  <h1>PSD2UMG</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>占位更新<br />
-Will update sooner.</p>
+      </div>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">02/28/2022</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
-          				   
-                    
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="Free_Casonry.html" 
+          title="Previous Post: Free Casonry">&laquo; Free Casonry</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="PSD2UMG.html" 
+          title="Next Post: PSD2UMG">PSD2UMG &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
 
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+          
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-              
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
 
 
-			<div class="row">
-			  <div class="large-6 columns">
-			  <p class="text-left" style="padding-top:25px;">
-			   
-			  </p>
-			  </div>
-			  <div class="large-6 columns">
-			<p class="text-right" style="padding-top:25px;">
-			
-			</p>
-			  </div>
-			</div>
-		</div>
-	</div><!-- large 8 -->
+
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">
@@ -516,6 +440,8 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 
+
+<script src="asset/prism.js"></script>
 
 
 <style type="text/css">
