@@ -122,12 +122,12 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+      <h2><a id="1-abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Abstract</h2>
 <p>Due to device performance and calculation limits, we cannot do physical simulation (refraction and reflection) realtime, and most glass materials rendering is basically offline. Hence I come out a very low-overhead way to implement the glass material in Unity3D. This solution is very flexible and portable. It can be applied to PBR only by replacing the light reflection and environment reflection.</p>
-<h2><a id="motivation-low-cost-glass-material-rendering-shader" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation: Low-cost glass material rendering shader</h2>
+<h2><a id="2-motivation-low-cost-glass-material-rendering-shader" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Motivation: Low-cost glass material rendering shader</h2>
 <p>Making the glass materials in mobile development  is difficult, because the glass contains many features: reflection, refraction, thickness, etc. These characteristics require abundant calculations when rendering in real-time, however due to device performance limits,  even in some console game, the render effect is not ideal. Here are  realtime screenshots from some console game, including <em>Final Fantasy VII Remake</em> and <em>Red Dead Redemption 2</em>. As we can see in these screenshots, these glasses are not perfect - they miss some refraction features.<br />
 <figure><img src="media/16690463295788/16690906338748.jpg" alt="Console Game Glass Effects" /><figcaption>Console Game Glass Effects<figcaption></figure></p>
-<h2><a id="problem" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem</h2>
+<h2><a id="3-problem" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Problem</h2>
 <p>The glass itself is transparent, and there are two main points that affect the texture of the glass:</p>
 <ul>
 <li><strong>Reflection</strong>: glass reflects highlights in the environment.</li>
@@ -136,9 +136,9 @@ The most difficult part is to figure out the refractive effect. However, in term
 <figure><img src="media/16690463295788/16691024311154.jpg" alt="" /></figure></li>
 </ul>
 <p>So I mainly start from this point to simulate the refraction visual effect. In order to improve the rendering performance, I use <strong>MatCap</strong> to sample the environment texture. I have some usage tips at my blog about how to use MatCap. - <a href="MatCap.html">MatCap</a>. You can check it out if you'd like. However, it is very flexible. You can replace PBR's ibl environment and realtime highlights based on your needs.</p>
-<h2><a id="code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h2>
+<h2><a id="4-code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Code</h2>
 <p>Complete code in C# based Unity3D is at Github.</p>
-<h3><a id="environmental-highlights-reflection" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Environmental Highlights Reflection</h3>
+<h3><a id="4-1-environmental-highlights-reflection" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 Environmental Highlights Reflection</h3>
 <p>The reflection part is relatively simple. You can process a glass highlight MatCap texture to handle the highlight reflection of the wine glass. On the left is the direct output of MatCap, and on the right is the output of MatCap as alpha.<br />
 <figure><img src="media/16690463295788/16691074450696.jpg" alt="" /></figure></p>
 <pre class="line-numbers"><code class="language-c#">_SpColor(&quot;Sp Color&quot;, Color) = (1.0,1.0,1.0,1.0)
@@ -149,8 +149,8 @@ spmatCap *=_SpColor.rgb
 o.color.rgb = spmatCap;
 o.color.a = spmatCap.r;
 </code></pre>
-<h3><a id="glass-refractionrefraction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Glass RefractionRefraction</h3>
-<h4><a id="1-glass-refraction-mask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Glass refraction MASK</h4>
+<h3><a id="4-2-glass-refractionrefraction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2 Glass RefractionRefraction</h3>
+<h4><a id="4-2-1-glass-refraction-mask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.1. Glass refraction MASK</h4>
 <p>Before making refraction effects, first we need to calculate the range of refraction and determine the refraction area where refraction needs to be used.</p>
 <h5><a id="a-the-thickness-range-of-the-glass-itself" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>A. The thickness range of the glass itself</h5>
 <ul>
@@ -199,7 +199,7 @@ float EdgeThickness (in float NoV ,in float eThickness )
    return 1-ET*eThickness ;
 }
 </code></pre>
-<h4><a id="2-simulate-glass-refraction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Simulate glass refraction</h4>
+<h4><a id="4-2-2-simulate-glass-refraction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.2. Simulate glass refraction</h4>
 <p>We need to use MatCap with a new UV sampling to simulate glass refraction, because we need to use the refraction mask obtained above to distort this MatCap texture.<br />
 However, you can use the same MatCap texture as the highlight, or you can create a new one separately. I am lazy and use the same one for the highlight</p>
 <p><figure><img src="media/16690463295788/16691077670951.jpg" alt="" /></figure></p>
@@ -228,7 +228,7 @@ float3 RFLerpColor (in float3 rfmatCap,in float Thickness)
 col.rgb = rfColor+spColor; //combine reflection and refraction
 col.a = alpha;
 </code></pre>
-<h4><a id="3-add-normal-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Add normal details</h4>
+<h4><a id="4-2-3-add-normal-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.3. Add normal details</h4>
 <p>Because the accuracy of the model in the game is relatively low, in order to improve the surface details, we can also add a normal map. This allows for richer representations.</p>
 <p>Because the above refraction MASK and MatCap mapping are calculated based on N (normal). So here we only need to calculate the normalMap.<br />
 <figure><img src="media/16690463295788/16691078453811.jpg" alt="" /></figure></p>
@@ -249,24 +249,18 @@ void GetNormal(v2f I, inout float3 N)
 </code></pre>
 <p>PS. If you need a more realistic visual effect, you can use an RT to create the effect of the objects behind being refracted and distorted, but in fact, you don't need to add it at all.<br />
 Now we are done our job on realizing glass material. I will discuss more about its usages and give some its application examples in Discussion Part.</p>
-<h2><a id="results" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h2>
-<p><figure><img src="media/16690463295788/16690910660905.jpg" alt="All the effect pictures are real-time screenshots in Unity3D, no Tone mapping." /><figcaption>All the effect pictures are real-time screenshots in Unity3D, no Tone mapping.<figcaption></figure><br />
+<h2><a id="5-results" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Results</h2>
+<p>All the effect pictures are real-time screenshots in Unity3D, no Tone mapping.<br />
+<figure><img src="media/16690463295788/16690910660905.jpg" alt="" /></figure><br />
 <figure><img src="media/16690463295788/16690911545749.jpg" alt="" /></figure></p>
 <p><figure><img src="media/16690463295788/champagne.gif" alt="champagne" /><figcaption>champagne<figcaption></figure><br />
 <figure><img src="media/16690463295788/beer.gif" alt="beer" /><figcaption>beer<figcaption></figure></p>
-<h2><a id="caveats" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Caveats</h2>
-<ul>
-<li>This is not an academic article.</li>
-<li>The author guarantee that the implementation has no complicated algorithms, no ray tracing, the solution could be without RT, without post-processing.</li>
-<li>This solution is mainly from the visual aspects to achieve the final effect.</li>
-<li>I love to help if you have any other question, idea or problem.</li>
-</ul>
-<h2><a id="discussion-more-advanced-usages-about-glass-material" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Discussion: More advanced usages about glass material</h2>
-<h3><a id="1-frosted-glass" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Frosted glass</h3>
+<h2><a id="6-discussion-more-advanced-usages-about-glass-material" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Discussion: More advanced usages about glass material</h2>
+<h3><a id="6-1-frosted-glass" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.1 Frosted glass</h3>
 <p>In fact, frosted glass is very, very simple under MatCap, we only need to take the texture of MatCap into Photoshop for blurring.<br />
 If it is IBL, Phone, GGX and other high-light reflections, it can be processed directly according to the roughness method.<br />
 <figure><img src="media/16690463295788/16691079921428.jpg" alt="" /></figure></p>
-<h3><a id="2-multiple-layers-of-glass-and-liquids" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Multiple layers of glass and liquids</h3>
+<h3><a id="6-2-multiple-layers-of-glass-and-liquids" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2 Multiple layers of glass and liquids</h3>
 <ul>
 <li>Now I have only done the outer surface of the cup, and the inside of the glass has not been processed yet.</li>
 <li>Take a look at the cup model first, here are some points to note.</li>
@@ -283,25 +277,32 @@ Here we create a new shader, or we can copy a copy of the previous outer wall sh
 <figure><img src="media/16690463295788/16691080711770.jpg" alt="" /></figure><br />
 Inner wall material: It is recommended to adjust the parameters to remove the edge thickness, unless you are making a double-layer glass. The bottom part of the cup is controlled by the thickness mask (texture and vertex color are fine).</li>
 </ul>
-<h4><a id="add-liquid-material" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add liquid material</h4>
+<h4><a id="6-2-1-add-liquid-material" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2.1 Add liquid material</h4>
 <p>Create a new liquid shader in the same way. Modify the color to make water, beer, red wine or other beverages.<br />
 <figure><img src="media/16690463295788/16691081216596.jpg" alt="" /></figure><br />
 Here, the thickness mask map texture is replaced with a small bubble texture. Used to simulate small bubbles in beer.<br />
 <figure><img src="media/16690463295788/16691081310410.jpg" alt="" /></figure><br />
 At the same time, use animation to sample K keyframes for this texture, and add an animation of UV flow. You can make the effect of beer bubbles flowing.<br />
 <figure><img src="media/16690463295788/16691081423985.jpg" alt="" /></figure></p>
-<h4><a id="about-render-hierarchy" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>About Render Hierarchy</h4>
+<h4><a id="6-2-2-about-render-hierarchy" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2.2 About Render Hierarchy</h4>
 <p><figure><img src="media/16690463295788/16691081559295.jpg" alt="" /></figure></p>
 <p><strong>Translucent material --- needs to modify the RenderQueue of the internal shader to -1 on the parameters of the external material. Otherwise, the context of the depth will be wrong at certain angles or complex models.</strong></p>
 <p>For example: the beer glasses above are rendered in the same order as the <strong>RenderQueue</strong>.</p>
 <p>Cup exterior (3000) ← cup liquid (2999) ← cup interior (2998)<br />
 <strong>Translucent part</strong>: In fact, just arrange them in the order we see them. Because when we see the whole cup, we first see the outer wall, followed by the liquid part, and finally the inner wall part. The smaller the value, the higher the rendering priority.</p>
-<h3><a id="3-glass-with-cracked-ice-effect" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Glass with cracked ice effect</h3>
+<h3><a id="6-3-glass-with-cracked-ice-effect" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.3 Glass with cracked ice effect</h3>
 <p>Use a cracked texture with a vertex color to paint the base thickness of the glass. It can simulate the effect similar to cracked glass.<br />
 <figure><img src="media/16690463295788/16691082062343.jpg" alt="" /></figure></p>
-<h4><a id="about-the-adaptation-of-pbr-dynamic-environment" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>About the Adaptation of PBR Dynamic Environment</h4>
+<h4><a id="6-3-1-about-the-adaptation-of-pbr-dynamic-environment" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.3.1 About the Adaptation of PBR Dynamic Environment</h4>
 <p>You can mix low-profile colors such as the ball association lighting and LightProbes of the environment with the refraction part, and it can change with the change of the environment color.</p>
-<h2><a id="references-tutorials" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>References &amp; Tutorials</h2>
+<h2><a id="7-caveats" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. Caveats</h2>
+<ul>
+<li>This is not an academic article.</li>
+<li>The author guarantee that the implementation has no complicated algorithms, no ray tracing, the solution could be without RT, without post-processing.</li>
+<li>This solution is mainly from the visual aspects to achieve the final effect.</li>
+<li>I love to help if you have any other question, idea or problem.</li>
+</ul>
+<h2><a id="8-references-tutorials" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>8. References &amp; Tutorials</h2>
 <p>Youtube MATCAP textures. <a href="https://www.youtube.com/watch?v=Yg5ULaS2jMk">https://www.youtube.com/watch?v=Yg5ULaS2jMk</a><br />
 Unity MatCap Tutorials. <a href="http://wiki.unity3d.com/index.php/MatCap">http://wiki.unity3d.com/index.php/MatCap</a></p>
 
