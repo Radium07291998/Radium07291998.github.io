@@ -110,23 +110,33 @@
                       <div class="a-content-text">
                         
                         	<h2><a id="note" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Note</h2>
-<p>This is not an academic article.<br />
-The author guarantee the implementation has no complicated algorithms, no ray tracing.</p>
-<p>The author love to help if you have any other question, idea or problem.</p>
+<ul>
+<li>This is not an academic article.</li>
+<li>The author guarantee that the implementation has no complicated algorithms, no ray tracing, the solution could be without RT, without post-processing.</li>
+<li>This solution is mainly from the visual aspects to achieve the final effect.</li>
+<li>I love to help if you have any other question, idea or problem.</li>
+</ul>
 <h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+<p>Due to performance and calculation limits, the real glass materials render is basically offline.<br />
+I come out a very low-overhead way to implement the glass material in Unity3D. This solution is very flexible and easy integratabtle. It can be applied to PBR only by replacing the light reflection and environment reflection.</p>
 <h2><a id="motivation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
 <p>Realizing the effect of glass in mobile development  is difficult, because the glass contains many features: reflection, refraction, thickness, etc.<br />
 These characteristics require abundant calculation when rendering in real-time, however due to device performance limits, most realistic glass rendering is offline. Even in some console game, the render effect is not ideal.</p>
-<p>Here are the examples show the difference between offline and realtime glass rendering.</p>
+<p>Here are  realtime screenshots from some console game, including Final Fantasy VII Remake Screenshot and Red Dead Redemption 2.<br />
+As we can see in the photos, these glasses are not perfect as they miss some refraction features.<br />
+<figure><img src="media/16690463295788/16690906338748.jpg" alt="Console Game Glass Effects" /><figcaption>Console Game Glass Effects<figcaption></figure></p>
 <h2><a id="problem" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem</h2>
 <h2><a id="code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h2>
 <p>Complete C# in Unity is at Github.</p>
 <h2><a id="results" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h2>
+<p><figure><img src="media/16690463295788/16690910660905.jpg" alt="All the effect pictures are real-time screenshots in Unity3D, no Tone mapping." /><figcaption>All the effect pictures are real-time screenshots in Unity3D, no Tone mapping.<figcaption></figure><br />
+<figure><img src="media/16690463295788/16690911545749.jpg" alt="" /></figure></p>
+<p><figure><img src="media/16690463295788/champagne.gif" alt="champagne" /><figcaption>champagne<figcaption></figure><br />
+<figure><img src="media/16690463295788/beer.gif" alt="beer" /><figcaption>beer<figcaption></figure></p>
 <h2><a id="caveats" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Caveats</h2>
 <h2><a id="discussion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Discussion</h2>
 <h2><a id="acknowledgment" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgment</h2>
 <h2><a id="references-tutorials" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>References &amp; Tutorials</h2>
-<p>Lei Zhang</p>
 
                         
                       </div>
