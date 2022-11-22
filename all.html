@@ -79,6 +79,8 @@
     <li><label>Categories</label></li>
 
         
+            <li><a href="Blogs.html">Blogs</a></li>
+        
             <li><a href="Portfolios.html">Portfolios</a></li>
          
 
@@ -117,10 +119,9 @@
 <li>I love to help if you have any other question, idea or problem.</li>
 </ul>
 <h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
-<p>Due to device performance and calculation limits, we cannot do physical simulation (refraction and reflection) realtime, and most glass materials rendering is basically offline.<br />
-Hence I come out a very low-overhead way to implement the glass material in Unity3D. This solution is very flexible and portable. It can be applied to PBR only by replacing the light reflection and environment reflection.</p>
+<p>Due to device performance and calculation limits, we cannot do physical simulation (refraction and reflection) realtime, and most glass materials rendering is basically offline. Hence I come out a very low-overhead way to implement the glass material in Unity3D. This solution is very flexible and portable. It can be applied to PBR only by replacing the light reflection and environment reflection.</p>
 <h2><a id="motivation-low-cost-glass-material-rendering-shader" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation: Low-cost glass material rendering shader</h2>
-<p>Making the glass materials in mobile development  is difficult, because the glass contains many features: reflection, refraction, thickness, etc. These characteristics require abundant calculations when rendering in real-time, however due to device performance limits,  even in some console game, the render effect is not ideal. Here are  realtime screenshots from some console game, including <em>Final Fantasy VII Remake</em> and <em>Red Dead Redemption 2</em>. As we can see in these screemshots, these glasses are not perfect - they miss some refraction features.<br />
+<p>Making the glass materials in mobile development  is difficult, because the glass contains many features: reflection, refraction, thickness, etc. These characteristics require abundant calculations when rendering in real-time, however due to device performance limits,  even in some console game, the render effect is not ideal. Here are  realtime screenshots from some console game, including <em>Final Fantasy VII Remake</em> and <em>Red Dead Redemption 2</em>. As we can see in these screenshots, these glasses are not perfect - they miss some refraction features.<br />
 <figure><img src="media/16690463295788/16690906338748.jpg" alt="Console Game Glass Effects" /><figcaption>Console Game Glass Effects<figcaption></figure></p>
 <h2><a id="problem" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem</h2>
 <p>The glass itself is transparent, and there are two main points that affect the texture of the glass:</p>
@@ -129,7 +130,7 @@ Hence I come out a very low-overhead way to implement the glass material in Unit
 <li><strong>Refraction</strong>: the glass thickness influences its refractive index. The thicker, the greater.<br />
 The most difficult part is to figure out the refractive index. However, in terms of human vision, strong refraction will interrupt the continuity of background. In position with strong refraction index, things behind can no longer be seen clearly, which will make people feel that 'this area is not completely transparent' .</li>
 </ul>
-<p>So I mainly start from this point to simulate the refraction visual effect. In order to save performance, I use MatCap to sample the environment texture. I have some usage tips at my blog - <a href="MatCap.html">MatCap</a>. You can check it out if you'd like. However, it is very flexible. You can replace PBR's ibl environment and realtime highlights according to your needs.</p>
+<p>So I mainly start from this point to simulate the refraction visual effect. In order to save performance, I use <strong>MatCap</strong> to sample the environment texture. I have some usage tips at my blog - <a href="MatCap.html">MatCap</a>. You can check it out if you'd like. However, it is very flexible. You can replace PBR's ibl environment and realtime highlights according to your needs.</p>
 <h2><a id="code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h2>
 <p>Complete code in C# based Unity3D is at Github.</p>
 <h3><a id="refraction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Refraction</h3>
@@ -158,6 +159,8 @@ The most difficult part is to figure out the refractive index. However, in terms
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
+          				  
+          					    <span class="posted-in"><a href='Blogs.html'>Blogs</a></span>
           				   
                     
 
@@ -356,6 +359,8 @@ The most difficult part is to figure out the refractive index. However, in terms
                 <div class="side-content">
 
       	<p class="cat-list">
+        
+            <a href="Blogs.html"><strong>Blogs</strong></a>
         
             <a href="Portfolios.html"><strong>Portfolios</strong></a>
          
