@@ -124,7 +124,52 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2><a id="1-abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Abstract</h2>
+      <ul>
+<li><a href="#realtime-glass-rendering">Realtime Glass Rendering</a>
+<ul>
+<li><a href="#1-abstract">1. Abstract</a></li>
+<li><a href="#2-motivation-low-cost-glass-material-rendering-shader">2. Motivation: Low-cost glass material rendering shader</a></li>
+<li><a href="#3-problem">3. Problem</a></li>
+<li><a href="#4-code">4. Code</a>
+<ul>
+<li><a href="#4-1-environmental-highlights-reflection">4.1 Environmental Highlights Reflection</a></li>
+<li><a href="#4-2-glass-refractionrefraction">4.2 Glass RefractionRefraction</a>
+<ul>
+<li><a href="#4-2-1-glass-refraction-mask">4.2.1. Glass refraction MASK</a>
+<ul>
+<li><a href="#a-the-thickness-range-of-the-glass-itself">A. The thickness range of the glass itself</a></li>
+<li><a href="#b-glass-side-thickness">B. Glass side thickness</a></li>
+</ul>
+</li>
+<li><a href="#4-2-2-simulate-glass-refraction">4.2.2. Simulate glass refraction</a></li>
+<li><a href="#4-2-3-add-normal-details">4.2.3. Add normal details</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-results">5. Results</a></li>
+<li><a href="#6-discussion-more-advanced-usages-about-glass-material">6. Discussion: More advanced usages about glass material</a>
+<ul>
+<li><a href="#6-1-frosted-glass">6.1 Frosted glass</a></li>
+<li><a href="#6-2-multiple-layers-of-glass-and-liquids">6.2 Multiple layers of glass and liquids</a>
+<ul>
+<li><a href="#6-2-1-add-liquid-material">6.2.1 Add liquid material</a></li>
+<li><a href="#6-2-2-about-render-hierarchy">6.2.2 About Render Hierarchy</a></li>
+</ul>
+</li>
+<li><a href="#6-3-glass-with-cracked-ice-effect">6.3 Glass with cracked ice effect</a>
+<ul>
+<li><a href="#6-3-1-about-the-adaptation-of-pbr-dynamic-environment">6.3.1 About the Adaptation of PBR Dynamic Environment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#7-caveats">7. Caveats</a></li>
+<li><a href="#8-references-tutorials">8. References &amp; Tutorials</a></li>
+</ul>
+</li>
+</ul>
+<h2><a id="1-abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Abstract</h2>
 <p>Due to device performance and calculation limits, we cannot do physical simulation (refraction and reflection) realtime, and most glass materials rendering is basically offline. Hence I come out a very low-overhead way to implement the glass material in Unity3D. This solution is very flexible and portable. It can be applied to PBR only by replacing the light reflection and environment reflection.</p>
 <h2><a id="2-motivation-low-cost-glass-material-rendering-shader" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Motivation: Low-cost glass material rendering shader</h2>
 <p>Making the glass materials in mobile development  is difficult, because the glass contains many features: reflection, refraction, thickness, etc. These characteristics require abundant calculations when rendering in real-time, however due to device performance limits,  even in some console game, the render effect is not ideal. Here are  realtime screenshots from some console game, including <em>Final Fantasy VII Remake</em> and <em>Red Dead Redemption 2</em>. As we can see in these screenshots, these glasses are not perfect - they miss some refraction features.<br />
