@@ -104,6 +104,444 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="Audio_Visualization.html">
+                
+                  <h1>Audio visualization: sampling, frequency and Fourier transforms</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2><a id="waves" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Waves</h2>
+<ul>
+<li>
+<p>Sound is produced by the vibration of an object, and this vibration is transmitted through a medium to our ears causing the eardrum to vibrate so that we can hear the sound.</p>
+</li>
+<li>
+<p>We can describe vibration in terms of a waveform, where the horizontal axis is time and the vertical axis is the displacement of the vibration, i.e., the distance from the origin.</p>
+</li>
+<li>
+<p>The two key properties of vibration are frequency and amplitude. Frequency refers to how many times a second it vibrates, which corresponds to the pitch of the sound, the higher the frequency the sharper and harsher the sound.</p>
+</li>
+<li>
+<p>Amplitude is the maximum displacement value, which corresponds to the volume, the greater the amplitude, the louder the sound.</p>
+</li>
+</ul>
+<p><figure><img src="media/16732874729435/16732876989306.png" alt="" /></figure>The above figure is a sine wave plotted with matplot, which shows that it oscillates 2 times in 0.01s, so the frequency is 200 and the amplitude is 1.</p>
+<pre class="line-numbers"><code class="language-python">from matplotlib import pyplot as plt
+import numpy as np
+
+def sin_wave(hz):
+  x = np.linspace(0, 0.01, 1000, endpoint=False)
+  y = np.sin(x * hz * 2 * np.pi)
+  plt.plot(x, y)
+  plt.xlabel(&quot;Time&quot;)
+  plt.axhline(y=0, color='k')
+  plt.show()
+
+sin_wave(200)
+</code></pre>
+<p>This simplest waveform corresponds to a sound called pure tone, which, as the name suggests, is very simple and pure.</p>
+<ul>
+<li>Here is a 200hz sound generated with <a href="https://www.scipy.org/">scipy</a>.</li>
+</ul>
+<audio controls="controls">
+  <source type="audio/wav" src="media/16732874729435/200hz.wav"></source>
+  <p>Your browser does not support the audio element.</p>
+</audio>
+<ul>
+<li>This is the sound at 800hz, and you can clearly feel that the sound is much sharper.</li>
+</ul>
+<audio controls="controls">
+  <source type="audio/wav" src="media/16732874729435/800hz.wav"></source>
+  <p>Your browser does not support the audio element.</p>
+</audio>
+<ul>
+<li>
+<p>The sound we hear in the real world is not a pure tone, but the result of superimposing various pure tones.</p>
+<p>In the picture below, blue is 200hz, yellow is 800hz, and green is the result of their superposition and is no longer a pure tone.<br />
+<figure><img src="media/16732874729435/16732876989330.png" alt="" /></figure></p>
+</li>
+</ul>
+<audio controls="controls">
+  <source type="audio/wav" src="media/16732874729435/mixed.wav"></source>
+  <p>Your browser does not support the audio element.</p>
+</audio>
+<ul>
+<li>To summarize.<br />
+We can represent a sound as a waveform, where the X-axis is time and the Y-axis is the displacement of the vibration<br />
+The simplest sine wave corresponds to a sound called pure tone<br />
+The sounds we hear in daily life are the result of superposition of various pure tones</li>
+</ul>
+<blockquote>
+<p>Tip:<br />
+<a href="https://www.lightnote.co/music-theory/sound-waves">LIGHTNOTE</a> is great website to learn music theory. It introduces basic music theory in an interactive format, including scales, chords, twelve mean meters, etc.</p>
+</blockquote>
+<h2><a id="sampling" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sampling</h2>
+<ul>
+<li>
+<p>Because sound is a continuous function over time, there are an infinite number of values in any given interval, and there is no way to store an infinite amount of data in a computer.</p>
+</li>
+<li>
+<p>To store it, we need to discretize it into a discrete sequence, and the specific way to do this is to sample it, using a fixed interval to evaluate the function.</p>
+</li>
+<li>
+<p>This is the original sound.<br />
+<figure><img src="media/16732874729435/16732876989343.png" alt="" /></figure></p>
+</li>
+<li>
+<p>This is the result after sampling.<br />
+<figure><img src="media/16732874729435/16732876989350.png" alt="" /></figure></p>
+</li>
+<li>
+<p>By sampling, we turn an endless sequence into a finite sequence where each value is called a sample so that it can be easily stored in the computer.</p>
+</li>
+<li>
+<p>There are two key parameters of sampling, which are sampling frequency and sampling depth.</p>
+</li>
+<li>
+<p>Sampling frequency refers to how many times per second a sample is taken. Obviously, the higher the sampling frequency, the more samples, the larger the amount of data, and also the closer to the original sound.</p>
+</li>
+<li>
+<p>Sampling depth refers to how many bits are used to store the sampled values, the more bits are used, the more detailed the restored sound is, and the color depth of the picture is the same reason.</p>
+</li>
+<li>
+<p>Suppose we use a sampling depth of 16bit and a sampling frequency of 44100, then a one-second sound becomes an int16 array of 44100.</p>
+</li>
+<li>
+<p>After we get the array of sample values, how to store the array is the domain of encoding. We can store it directly, or we can use some algorithm to compress it and store it later. There are various ways to do this, corresponding to various audio formats, such as MP3, AAC, WAV, and so on.</p>
+</li>
+<li>
+<p>The AAC and MP3 formats are lossy, which means that when stored and then read out, there will be some differences between the samples and the original, but these differences are subtle and can be ignored. The characteristic of lossy is to reduce the file size significantly without affecting the final playback effect.</p>
+</li>
+<li>
+<p>WAV, on the other hand, is lossless in the sense that whatever is input is what is read out, but naturally the disadvantage is that it is much larger.</p>
+</li>
+<li>
+<p>We can read WAV audio through scipy.</p>
+</li>
+</ul>
+<pre class="line-numbers"><code class="language-python">import scipy.io.wavfile as wav
+
+rate, all_samples = wav.read(&quot;xxx.wav&quot;)
+
+print(rate, len(all_samples), all_samples.dtype)
+# 44100 10639873 int16
+# Above are: the sample rate, the total number of samples, and the type of sample value
+# int16 means that each sample is a 16bit integer
+print(all_samples[:20])
+# [-41 -51 -49 -41 -28 -15 -20 -33 -32 -38 -54 -54 -44 -30  -8  10  11   2
+# -14 -36]
+# the sample is a set of numbers
+</code></pre>
+<p>As we can see, the sampling frequency is 44100 and there are 10639873 samples, which are stored using int16.</p>
+<h2><a id="fourier-transform" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fourier Transform</h2>
+<ul>
+<li>Given a 200hz waveform and an 800hz waveform, calculating the result after superimposing them is very simple.<br />
+<figure><img src="media/16732874729435/16732876989330.png" alt="" /></figure></li>
+<li>But what if the result is given after superposition?<br />
+<figure><img src="media/16732874729435/16732876989362.png" alt="" /></figure></li>
+</ul>
+<p>With the Fourier transform, we can disassemble a composite waveform into the simple waveforms that make it up.</p>
+<p>We can think of the Fourier transform as a function whose input is N real numbers, representing sampled values, and whose output is N complex numbers, representing components at different frequencies. Here we ignore the real and imaginary parts of the complex numbers and only care about its mode, i.e., the absolute value.</p>
+<pre class="line-numbers"><code class="language-python">from scipy.fft import fft, fftfreq
+
+# This is the sample value that will be transformed:  [0, 1, 2, 3, 4, 5, 6, 7]
+samples = np.arange(8)
+
+# The result after FFT
+y = fft(samples)
+
+for i in y:
+  print(i)
+
+# The result of the transformation is 8 complex numbers
+# (28-0j)
+# (-3.9999999999999996+9.65685424949238j)
+# (-4+4j)
+# (-4+1.6568542494923797j)
+# (-4-0j)
+# (-4-1.6568542494923797j)
+# (-4-4j)
+# (-3.9999999999999996-9.65685424949238j)
+
+# x is the frequency corresponding to each of the above results
+# Here the first argument of the fftfreq function is the number of samples
+# The second parameter is the inverse of the sampling rate, which we assume to be 8
+x = fftfreq(len(samples), 1 / 8)
+
+print(x)
+# [ 0.  1.  2.  3. -4. -3. -2. -1.]
+# Here it means that y[0] corresponds to a frequency of 0 and y[1] corresponds to a frequency of 1
+# What does it mean to have a negative frequency? [ignore]
+</code></pre>
+<p>The above code constructs a Fourier transform of 8 numbers and assumes that the set of samples is sampled using a sampling rate of 8.</p>
+<p>The result of the transform is 8 complex numbers, which correspond to 8 frequencies, and we can see that the positive and negative frequencies correspond to the same transform result, i.e. the transform result is symmetric.</p>
+<p>The result obtained above is not very meaningful, because the input is not very meaningful. Now let's use the Fourier transform to process the waveform after the 200hz+800hz superposition and see if it can be restored to 200hz and 800hz.</p>
+<pre class="line-numbers"><code class="language-python">import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib.pyplot import figure
+from scipy.fft import fft, fftfreq
+
+figure(figsize=(14, 6), dpi=80)
+
+DURATION = 0.01
+SAMPLE_RATE = 44100
+
+def gen_sine_wave(freq):
+  x = np.linspace(0, DURATION, int(DURATION * SAMPLE_RATE), endpoint=False)
+  y = np.sin(x * freq * 2 * np.pi)
+  return y
+
+hz200 = gen_sine_wave(200)
+hz800 = gen_sine_wave(800)
+
+# ampling data after superposition
+# Here each sample is not int16 but float
+total = hz200 + hz800
+
+y = fft(total)
+x = fftfreq(len(total), 1 / SAMPLE_RATE)
+
+plt.plot(x, np.abs(y))
+plt.show()
+</code></pre>
+<p>As we can see in the figure, firstly, the output is symmetrical to the left and right, so we ignore the negative frequencies and focus only on the positive ones.</p>
+<p>Secondly, the Fourier transform tells us that the input signal consists of 2 frequencies, which can be seen as 200 and 800 when the program is running with the mouse over it. i.e., by using the Fourier transform, we break up the composite waveform into a simple waveform.</p>
+<p>Or, by Fourier transforming a signal, we split it into a set of sine waves of different frequencies, transforming it from the time domain to the frequency domain. The signal is still the same signal, but we look at it from a different perspective.</p>
+<p><figure><img src="media/16732874729435/16732876989369.png" alt="" /></figure></p>
+<ul>
+<li>To summarize.</li>
+</ul>
+<p>The Fourier transform is a function in which the input string of numbers represents the sample values and the output string of complex numbers represents the frequency components<br />
+The specific frequency of each number can be calculated based on the number of samples and sampling frequency<br />
+We do not care about the direction of the complex numbers, we only care about the mode of the complex numbers<br />
+The Fourier output is left-right symmetric, so only half of the information is of value<br />
+Since the output is symmetric, only half of the information has value, so there is a variant called rfft, which returns only half of the information and can be computed faster.</p>
+<pre class="line-numbers"><code class="language-python">import numpy as np
+from scipy.fft import rfft, rfftfreq
+
+SAMPLE_RATE = 8
+
+samples = np.arange(8)
+
+y = rfft(samples)
+x = rfftfreq(len(samples), 1 / SAMPLE_RATE)
+
+
+print(x)
+# [0. 1. 2. 3. 4.]
+
+for i in y:
+  print(i)
+
+# Comparing with the previous output of fft/fftfreq, the results are the same, except that the symmetric redundancy information is removed
+# (28+0j)
+# (-3.9999999999999996+9.65685424949238j)
+# (-4+4j)
+# (-4+1.6568542494923797j)
+# (-4+0j)
+</code></pre>
+<h2><a id="audio-visualization" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Audio visualization</h2>
+<p>Each bar that beats with the music corresponds to a frequency or a set of frequencies, while the height of the bar is the component size of the frequency, both of which are given by the Fourier transform.</p>
+<p>Now the remaining question is what is the input? We can't take all the samples of a song as input to the Fourier transform, if we did that we would only get one copy of the frequency data.</p>
+<p>We want the frequency data to change with the music, so we choose a window size (FFT_SIZE) of, say, 2048. As the music plays, we select 2048 samples from the current playing position each time and then perform the Fourier transform.</p>
+<ul>
+<li>Now our initial audio visualization scheme is defined.</li>
+</ul>
+<ol>
+<li>Parse the audio file to get allSamples</li>
+<li>In each plot, select FFT_SIZE samples starting from the current sample</li>
+<li>Perform Fourier transform on these samples</li>
+<li>Modulate the complex numbers obtained from the transform</li>
+<li>Transform the result to 0 ~ 1 and plot it</li>
+<li>Next, let's implement a simple audio visualization tool using the Web.</li>
+</ol>
+<h4><a id="1%EF%BC%8Cfirst-parsing-the-audio-file-to-get-allsamples-we-can-use-the-webaudio-api" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1，First, parsing the audio file to get allSamples we can use the WebAudio API.</h4>
+<pre class="line-numbers"><code class="language-python">// Get the binary data of an audio file
+const ab = fetch(&quot;xxx.mp3&quot;).then(res =&gt; res.arrayBuffer())
+
+// New WebAudio context
+const audioCtx = new AudioContext()
+
+// Parse arrayBuffer
+const audioBuffer = audioCtx.decodeAudioData(ab)
+
+console.log(audioBuffer)
+// AudioBuffer {length: 10639872, duration: 241.2669387755102, sampleRate: 44100, numberOfChannels: 2}
+//  duration: 241.2669387755102
+//  length: 10639872
+//  numberOfChannels: 2
+//  sampleRate: 44100
+// [[Prototype]]: AudioBuffer
+
+// Generally audio is available in multiple channels for stereo playback
+// Here we simplified the question by select the first channel
+const allSamples = audioBuffer.getChannelData(0)
+
+// allSamplesis the array of samples we want, each sample value is a float number
+console.log(allSamples.slice(0, 10))
+// Float32Array(10) [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+</code></pre>
+<h4><a id="2%EF%BC%8Cnext-we-use-requestanimationframe-to-draw" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2，Next, we use <code>requestAnimationFrame</code> to draw.</h4>
+<p>Each time we draw, we need to get the current playback position. audioBuffer has the total time of the audio, through <code>audioCtx.currentTime</code> we can find out the current playback time, and divide the two together to get the playback position.</p>
+<pre class="line-numbers"><code class="language-javascript=">// On User Click
+const onPlay = () =&gt; {
+  // Record the start time
+  const startTime = audioCtx.currentTime
+
+  const draw = () =&gt; {
+    requestAnimationFrame(draw)how long have been played
+
+    // the playing time (in seconds)
+    const cur = audioCtx.currentTime - startTime
+
+    // the percentage of playing progress
+    const per = cur / audioBuffer.duration
+
+    const startIndex = Math.floor(allSamples.length * per)
+
+    // From startIndex get FFT_SIZE samples which are to be Fourier transformed
+    const samples = allSamples.slice(startIndex, startIndex + FFT_SIZE)
+  }
+
+  requestAnimationFrame(draw)
+}
+</code></pre>
+<h4><a id="3%EF%BC%8Cafter-fft-we-get-1025-complex-numbers-and-modulo-these-complex-numbers-we-get-1025-real-numbers" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3，After FFT, we get 1025 complex numbers, and modulo these complex numbers, we get 1025 real numbers.</h4>
+<pre class="line-numbers"><code class="language-javascript=">// Define Complex Class
+class Complex {
+  constructor(real, imag) {
+    this.real = real
+    this.imag = imag
+  }
+
+  abs() {
+    return Math.sqrt(this.real * this.real + this.imag * this.imag)
+  }
+}
+
+const rfft = (samples) =&gt; {
+  const f = new FFTJS(samples.length)
+  const out = f.createComplexArray()
+
+  const N = samples.length / 2 + 1
+
+  f.realTransform(out, samples)
+
+  const value = []
+
+  for(let i = 0; i &lt; N; i++) {
+    value[i] = new Complex(out[2*i+0], out[2*i+1])
+  }
+
+  return value
+}
+
+
+// We get a set of real nums.
+const y = rfft(samples).map(c =&gt; c.abs())
+
+</code></pre>
+<h4><a id="4%EF%BC%8Cthe-next-step-is-to-map-these-numbers-to-the-0-1-interval" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4，The next step is to map these numbers to the 0 ~ 1 interval.</h4>
+<pre class="line-numbers"><code class="language-javascript">const result = y.map(v =&gt; (v + 20) / 80)
+</code></pre>
+<h4><a id="5-once-we-have-a-set-of-numbers-from-0-to-1-we-can-use-canvas-to-draw" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Once we have a set of numbers from 0 to 1, we can use Canvas to draw.</h4>
+<pre class="line-numbers"><code class="language-javascript=">const W = 800 // canvas width
+const H = 600 // canvas height
+
+const draw = (spectrum) =&gt; {
+  ctx.clearRect(0, 0, W, H)
+
+  const barWidth = W / spectrum.length
+
+  for(let i = 0; i &lt; spectrum.length; i++) {
+    const v = spectrum[i]
+    const x = i * barWidth
+    const height = v * H
+    const y = H - height
+    ctx.fillRect(x, y, barWidth, height)
+  }
+}
+</code></pre>
+<h1><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
+<p><a href="https://codepen.io/RadiumLZhang/full/xxJgzQJ">WebGL Waveform</a><br />
+<a href="https://codepen.io/RadiumLZhang/full/KKBaerW">Canvas Bar chart</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">01/10/2023</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16712096246646.html">
+                
+                  <h1>Web Audio Visualization</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1><a id="1-abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Abstract</h1>
+<p>Audio visualization is the process of obtaining data from audio sources such as frequency, waveform, and other data, converting it into a graphical or visual representation on a screen, and then interacting with it.<br />
+As defined, the main process of audio visualization only involves two steps:</p>
+<ol>
+<li>Obtaining audio data</li>
+<li>Mapping and rendering the data to create a visualization pattern</li>
+</ol>
+<h1><a id="2-motivation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Motivation</h1>
+<h1><a id="3-solution" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Solution</h1>
+<h2><a id="3-1-get-audio-data" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 Get audio data</h2>
+<p>Sound has three elements: loudness, pitch, and timbre. Audio visualization mainly focuses on the first two elements, so we are mainly concerned with the two physical attributes corresponding to loudness and pitch, which are amplitude and frequency respectively. Audio is a continuous signal that changes over time, so time is also an important dimension of audio data.</p>
+<p>Usually what we refer to as a waveform is a graph with time on the X-axis and amplitude on the Y-axis. The data represented by the waveform can also be called waveform data or time domain data; while the spectrum analysis bar graph (the kind in old-fashioned players) is a graph with frequency on the X-axis and amplitude on the Y-axis, which changes dynamically with audio playback time. This type of graph contains data called frequency data or frequency domain data.</p>
+<p>Amplitude, frequency, and time actually form a three-dimensional data space, and time domain and frequency domain are actually results from different perspectives of audio data. As shown in the figure below, the waveform is an orthogonal view observed from the lower left corner of the figure below, while the spectrum analysis bar graph is an orthogonal view observed from the lower right corner of the figure below.</p>
+<h3><a id="3-1-1-basic-knowledge-about-audio-data" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.1 Basic Knowledge About Audio Data</h3>
+<h4><a id="3-1-1-1-data-dimensions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.1.1 Data dimensions</h4>
+<h4><a id="3-1-1-2-data-sampling" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.1.2 Data Sampling</h4>
+<h4><a id="3-1-1-3-fourier-transform" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.1.3 Fourier transform</h4>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">12/17/2022</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="16699957214552.html">
                 
                   <h1>Reinforcement Learning - Flappy Bird</h1>
@@ -881,6 +1319,18 @@ c. The last task is raise their hand to stop the right bus.<br />
 	      
 		      
 			      <li class="post">
+			        <a href="Audio_Visualization.html">Audio visualization: sampling, frequency and Fourier transforms</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16712096246646.html">Web Audio Visualization</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16699957214552.html">Reinforcement Learning - Flappy Bird</a>
 			      </li>
 		     
@@ -898,16 +1348,8 @@ c. The last task is raise their hand to stop the right bus.<br />
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a>
-			      </li>
-		     
 		  
 		      
-			      <li class="post">
-			        <a href="Free_Casonry.html">Free Casonry</a>
-			      </li>
-		     
 		  
 		      
 		  
