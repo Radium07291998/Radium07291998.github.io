@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Realtime Glass Rendering - Radium's Website
+  Technical Solution for Realtime Glass Rendering - Radium's Website
   
   </title>
   
@@ -95,36 +95,19 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
+	$(function(){
+		var currentURL = 'Realtime_Glass_Rendering.html';
+		currentURL = currentURL.substr(0,currentURL.length-5);
+		$('#menu_item_'+currentURL).addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>Realtime Glass Rendering</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">05/05/2022</span>
 
-          <span>posted in&nbsp;</span> 
-          
-              <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
-           
-         
-          <span class="comments">
-            
+    <div id="single-page-wrap">
+        <h1>Technical Solution for Realtime Glass Rendering</h1>
 
-            
-          </span>
-
-        </div>
-      </div><!-- article -->
-
-      <div class="article-content">
-      <ul>
+        <div class="markdown-body post-page">
+        <ul>
 <li><a href="#realtime-glass-rendering">Realtime Glass Rendering</a>
 <ul>
 <li><a href="#1-abstract">1. Abstract</a></li>
@@ -173,22 +156,22 @@
 <p>Due to device performance and calculation limits, we cannot do physical simulation (refraction and reflection) realtime, and most glass materials rendering is basically offline. Hence I come out a very low-overhead way to implement the glass material in Unity3D. This solution is very flexible and portable. It can be applied to PBR only by replacing the light reflection and environment reflection.</p>
 <h2><a id="2-motivation-low-cost-glass-material-rendering-shader" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Motivation: Low-cost glass material rendering shader</h2>
 <p>Making the glass materials in mobile development  is difficult, because the glass contains many features: reflection, refraction, thickness, etc. These characteristics require abundant calculations when rendering in real-time, however due to device performance limits,  even in some console game, the render effect is not ideal. Here are  realtime screenshots from some console game, including <em>Final Fantasy VII Remake</em> and <em>Red Dead Redemption 2</em>. As we can see in these screenshots, these glasses are not perfect - they miss some refraction features.<br />
-<figure><img src="media/16690463295788/16690906338748.jpg" alt="Console Game Glass Effects" /><figcaption>Console Game Glass Effects<figcaption></figure></p>
+<img src="media/16690463295788/16690906338748.jpg" alt="Console Game Glass Effects" /></p>
 <h2><a id="3-problem" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Problem</h2>
 <p>The glass itself is transparent, and there are two main points that affect the texture of the glass:</p>
 <ul>
 <li><strong>Reflection</strong>: glass reflects highlights in the environment.</li>
 <li><strong>Refraction</strong>: the glass thickness influences its refractive level. The thicker, the greater. Note here: the thickness would not influence the refractive index but the refractive visual effect.<br />
 The most difficult part is to figure out the refractive effect. However, in terms of human vision, strong refraction will interrupt the continuity of background. In position with strong refraction effect, things behind can no longer be seen clearly, which will make people feel that 'this area is not completely transparent' .  You can only see a blurring background through the glass.<br />
-<figure><img src="media/16690463295788/16691024311154.jpg" alt="" /></figure></li>
+<img src="media/16690463295788/16691024311154.jpg" alt="" /></li>
 </ul>
 <p>So I mainly start from this point to simulate the refraction visual effect. In order to improve the rendering performance, I use <strong>MatCap</strong> to sample the environment texture. I have some usage tips at my blog about how to use MatCap. - <a href="MatCap.html">MatCap</a>. You can check it out if you'd like. However, it is very flexible. You can replace PBR's ibl environment and realtime highlights based on your needs.</p>
 <h2><a id="4-code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Code</h2>
 <p>Complete code in C# based Unity3D is at Github.</p>
 <h3><a id="4-1-environmental-highlights-reflection" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 Environmental Highlights Reflection</h3>
 <p>The reflection part is relatively simple. You can process a glass highlight MatCap texture to handle the highlight reflection of the wine glass. On the left is the direct output of MatCap, and on the right is the output of MatCap as alpha.<br />
-<figure><img src="media/16690463295788/16691074450696.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">_SpColor(&quot;Sp Color&quot;, Color) = (1.0,1.0,1.0,1.0)
+<img src="media/16690463295788/16691074450696.jpg" alt="" /></p>
+<pre><code class="language-c#">_SpColor(&quot;Sp Color&quot;, Color) = (1.0,1.0,1.0,1.0)
 // make a texture for highlight part to control the reflection visual effect
 float3 spmatCap= tex2D(_CapTex,matCapuv);
 spmatCap *=_SpColor.rgb
@@ -206,15 +189,15 @@ The thickness here can be stored in 2 ways for output:</li>
 <li>Preprocess a thickness texture.</li>
 <li>Output by painting to a vertex color.</li>
 </ul>
-<pre class="line-numbers"><code class="language-c#">float3 thicknessTex= tex2D(_MaskTex, i.uv);
+<pre><code class="language-c#">float3 thicknessTex= tex2D(_MaskTex, i.uv);
 float sThickness = thicknessTex.r * i.color.r; //Solid glass part of the cup
 </code></pre>
 <p>I store the texture in the R channel, and the other channels can be left for later.<br />
 In this way we can get a manually controllable thickness range.<br />
-<figure><img src="media/16690463295788/16691076730180.jpg" alt="" /></figure></p>
+<img src="media/16690463295788/16691076730180.jpg" alt="" /></p>
 <h5><a id="b-glass-side-thickness" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>B. Glass side thickness</h5>
 <p>The edge part is calculated here using Finier.</p>
-<pre class="line-numbers"><code class="language-c#">_FenierEdge(&quot;Fenier Range&quot;, Range(-2, 2)) = 0.0
+<pre><code class="language-c#">_FenierEdge(&quot;Fenier Range&quot;, Range(-2, 2)) = 0.0
 _FenierIntensity(&quot;Fenier intensity&quot;, Range(0, 10)) = 2.0
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 float3 V = normalize(_WorldSpaceCameraPos - i.worldPos);
@@ -227,10 +210,10 @@ float EdgeThickness (in float NoV)
 }
 </code></pre>
 <p>By adjusting the parameters we can get the edge range of the cup.<br />
-<figure><img src="media/16690463295788/16691077191650.jpg" alt="" /></figure></p>
+<img src="media/16690463295788/16691077191650.jpg" alt="" /></p>
 <p>Finally, combining the two ranges together, we get the complete glass refraction area.<br />
-<figure><img src="media/16690463295788/16691077301576.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">_FenierEdge(&quot;FenierRange&quot;, Range(-2, 2)) = 0.0
+<img src="media/16690463295788/16691077301576.jpg" alt="" /></p>
+<pre><code class="language-c#">_FenierEdge(&quot;FenierRange&quot;, Range(-2, 2)) = 0.0
 _FenierIntensity(&quot;Fenierintensity&quot;, Range(0, 10)) = 2.0
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 float3 V = normalize(_WorldSpaceCameraPos - i.worldPos);
@@ -249,12 +232,12 @@ float EdgeThickness (in float NoV ,in float eThickness )
 <h4><a id="4-2-2-simulate-glass-refraction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.2. Simulate glass refraction</h4>
 <p>We need to use MatCap with a new UV sampling to simulate glass refraction, because we need to use the refraction mask obtained above to distort this MatCap texture.<br />
 However, you can use the same MatCap texture as the highlight, or you can create a new one separately. I am lazy and use the same one for the highlight</p>
-<p><figure><img src="media/16690463295788/16691077670951.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">float Refintensity = Thickness*_Refintensity;
+<p><img src="media/16690463295788/16691077670951.jpg" alt="" /></p>
+<pre><code class="language-c#">float Refintensity = Thickness*_Refintensity;
 float3 rfmatCap = tex2D(_RfCapTex,matCapuv+Refintensity);
 float3 rfmatColor= RFLerpColor(rfmatCap,Thickness) 
 </code></pre>
-<pre class="line-numbers"><code class="language-c#">// Add a custom color parameter to _BaseColor 
+<pre><code class="language-c#">// Add a custom color parameter to _BaseColor 
 // then you can control the glass body color
 float3 RFLerpColor (in float3 rfmatCap,in float Thickness)
 {
@@ -266,10 +249,10 @@ float3 RFLerpColor (in float3 rfmatCap,in float Thickness)
 }
 </code></pre>
 <p>After simulating glass refraction, we need to output the refraction MASK we made before  as alpha, and the whole refraction part is finished.<br />
-<figure><img src="media/16690463295788/16691078038152.jpg" alt="" /></figure></p>
+<img src="media/16690463295788/16691078038152.jpg" alt="" /></p>
 <p>Finally, the reflection and refraction are combined to output the whole effect. We are basically done on this part.<br />
-<figure><img src="media/16690463295788/16691078152738.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">float alpha = saturate(max(spmatCap.r*_SpColor.a ,Thickness)*_BaseColor.a);
+<img src="media/16690463295788/16691078152738.jpg" alt="" /></p>
+<pre><code class="language-c#">float alpha = saturate(max(spmatCap.r*_SpColor.a ,Thickness)*_BaseColor.a);
 //_SpColor is a separate color control for highlight colors
 // The alpha calculation here is for that the transparency of the highlights can be controlled separately, as well as the transparency of the overall cup
 col.rgb = rfColor+spColor; //combine reflection and refraction
@@ -278,8 +261,8 @@ col.a = alpha;
 <h4><a id="4-2-3-add-normal-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.3. Add normal details</h4>
 <p>Because the accuracy of the model in the game is relatively low, in order to improve the surface details, we can also add a normal map. This allows for richer representations.</p>
 <p>Because the above refraction MASK and MatCap mapping are calculated based on N (normal). So here we only need to calculate the normalMap.<br />
-<figure><img src="media/16690463295788/16691078453811.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">o.worldTangent =normalize(UnityObjectToWorldNormal(v.tangent));
+<img src="media/16690463295788/16691078453811.jpg" alt="" /></p>
+<pre><code class="language-c#">o.worldTangent =normalize(UnityObjectToWorldNormal(v.tangent));
 o.worldBinormal = cross(o.worldNorm, o.worldTangent) * v.tangent.w;   
 o.uv.zw = TRANSFORM_TEX(v.texcoord.xy,_NormalTex) ; //(give the normals separate UVs so that you can use detail normals.
 You can also use multiple sets of normal textures to blend)
@@ -298,15 +281,15 @@ void GetNormal(v2f I, inout float3 N)
 Now we are done our job on realizing glass material. I will discuss more about its usages and give some its application examples in Discussion Part.</p>
 <h2><a id="5-results" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Results</h2>
 <p>All the effect pictures are real-time screenshots in Unity3D, no Tone mapping.<br />
-<figure><img src="media/16690463295788/16690910660905.jpg" alt="" /></figure><br />
-<figure><img src="media/16690463295788/16690911545749.jpg" alt="" /></figure></p>
-<p><figure><img src="media/16690463295788/champagne.gif" alt="champagne" /><figcaption>champagne<figcaption></figure><br />
-<figure><img src="media/16690463295788/beer.gif" alt="beer" /><figcaption>beer<figcaption></figure></p>
+<img src="media/16690463295788/16690910660905.jpg" alt="" /><br />
+<img src="media/16690463295788/16690911545749.jpg" alt="" /></p>
+<p><img src="media/16690463295788/champagne.gif" alt="champagne" /><br />
+<img src="media/16690463295788/beer.gif" alt="beer" /></p>
 <h2><a id="6-discussion-more-advanced-usages-about-glass-material" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Discussion: More advanced usages about glass material</h2>
 <h3><a id="6-1-frosted-glass" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.1 Frosted glass</h3>
 <p>In fact, frosted glass is very, very simple under MatCap, we only need to take the texture of MatCap into Photoshop for blurring.<br />
 If it is IBL, Phone, GGX and other high-light reflections, it can be processed directly according to the roughness method.<br />
-<figure><img src="media/16690463295788/16691079921428.jpg" alt="" /></figure></p>
+<img src="media/16690463295788/16691079921428.jpg" alt="" /></p>
 <h3><a id="6-2-multiple-layers-of-glass-and-liquids" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2 Multiple layers of glass and liquids</h3>
 <ul>
 <li>Now I have only done the outer surface of the cup, and the inside of the glass has not been processed yet.</li>
@@ -319,27 +302,27 @@ If it is IBL, Phone, GGX and other high-light reflections, it can be processed d
 </ul>
 </li>
 <li>The reason for distinguishing the inner and outer walls is mainly to solve the problem of wrong front-back relationship caused by translucent sorting.<br />
-<figure><img src="media/16690463295788/16691080601660.jpg" alt="" /></figure><br />
+<img src="media/16690463295788/16691080601660.jpg" alt="" /><br />
 Here we create a new shader, or we can copy a copy of the previous outer wall shader and assign it to the inner wall model of the cup.<br />
-<figure><img src="media/16690463295788/16691080711770.jpg" alt="" /></figure><br />
+<img src="media/16690463295788/16691080711770.jpg" alt="" /><br />
 Inner wall material: It is recommended to adjust the parameters to remove the edge thickness, unless you are making a double-layer glass. The bottom part of the cup is controlled by the thickness mask (texture and vertex color are fine).</li>
 </ul>
 <h4><a id="6-2-1-add-liquid-material" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2.1 Add liquid material</h4>
 <p>Create a new liquid shader in the same way. Modify the color to make water, beer, red wine or other beverages.<br />
-<figure><img src="media/16690463295788/16691081216596.jpg" alt="" /></figure><br />
+<img src="media/16690463295788/16691081216596.jpg" alt="" /><br />
 Here, the thickness mask map texture is replaced with a small bubble texture. Used to simulate small bubbles in beer.<br />
-<figure><img src="media/16690463295788/16691081310410.jpg" alt="" /></figure><br />
+<img src="media/16690463295788/16691081310410.jpg" alt="" /><br />
 At the same time, use animation to sample K keyframes for this texture, and add an animation of UV flow. You can make the effect of beer bubbles flowing.<br />
-<figure><img src="media/16690463295788/16691081423985.jpg" alt="" /></figure></p>
+<img src="media/16690463295788/16691081423985.jpg" alt="" /></p>
 <h4><a id="6-2-2-about-render-hierarchy" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2.2 About Render Hierarchy</h4>
-<p><figure><img src="media/16690463295788/16691081559295.jpg" alt="" /></figure></p>
+<p><img src="media/16690463295788/16691081559295.jpg" alt="" /></p>
 <p><strong>Translucent material --- needs to modify the RenderQueue of the internal shader to -1 on the parameters of the external material. Otherwise, the context of the depth will be wrong at certain angles or complex models.</strong></p>
 <p>For example: the beer glasses above are rendered in the same order as the <strong>RenderQueue</strong>.</p>
 <p>Cup exterior (3000) ← cup liquid (2999) ← cup interior (2998)<br />
 <strong>Translucent part</strong>: In fact, just arrange them in the order we see them. Because when we see the whole cup, we first see the outer wall, followed by the liquid part, and finally the inner wall part. The smaller the value, the higher the rendering priority.</p>
 <h3><a id="6-3-glass-with-cracked-ice-effect" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.3 Glass with cracked ice effect</h3>
 <p>Use a cracked texture with a vertex color to paint the base thickness of the glass. It can simulate the effect similar to cracked glass.<br />
-<figure><img src="media/16690463295788/16691082062343.jpg" alt="" /></figure></p>
+<img src="media/16690463295788/16691082062343.jpg" alt="" /></p>
 <h4><a id="6-3-1-about-the-adaptation-of-pbr-dynamic-environment" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.3.1 About the Adaptation of PBR Dynamic Environment</h4>
 <p>You can mix low-profile colors such as the ball association lighting and LightProbes of the environment with the refraction part, and it can change with the change of the environment color.</p>
 <h2><a id="7-caveats" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. Caveats</h2>
@@ -353,142 +336,9 @@ At the same time, use animation to sample K keyframes for this texture, and add 
 <p>Youtube MATCAP textures. <a href="https://www.youtube.com/watch?v=Yg5ULaS2jMk">https://www.youtube.com/watch?v=Yg5ULaS2jMk</a><br />
 Unity MatCap Tutorials. <a href="http://wiki.unity3d.com/index.php/MatCap">http://wiki.unity3d.com/index.php/MatCap</a></p>
 
-
-    
-
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="PSD2UMG.html" 
-          title="Previous Post: PSD2UMG">&laquo; PSD2UMG</a>
-      
-        </p>
         </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="Photoshop_Layer_Normalization_Tool.html" 
-          title="Next Post: Photoshop Layer Normalization Tool">Photoshop Layer Normalization Tool &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
-
-
-
-
- <div class="large-4 medium-4 columns">
-  <div class="hide-for-small">
-    <div id="sidebar" class="sidebar">
-          <div id="site-info" class="site-info">
-            
-                <div class="site-a-logo"><img src="https://raw.githubusercontent.com/RadiumLZhang/RadiumLZhang.github.io/main/profile/20221024203511.jpg" /></div>
-            
-                <h1>Radium's Website</h1>
-                <div class="site-des"></div>
-                <div class="social">
-
-
-
-<a target="_blank" class="linkedin" href="https://www.linkedin.com/in/lei-zhang-19140715a/" title="LinkedIn">LinkedIn</a>
-
-
-
-
-
-<a target="_blank" class="github" target="_blank" href="https://github.com/RadiumLZhang" title="GitHub">GitHub</a>
-
-  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
-                
-              	 </div>
-          	</div>
-
-             
-
-              <div id="site-categories" class="side-item ">
-                <div class="side-header">
-                  <h2>Categories</h2>
-                </div>
-                <div class="side-content">
-
-      	<p class="cat-list">
-        
-            <a href="Portfolios.html"><strong>Portfolios</strong></a>
-        
-            <a href="Literature_Review_Notes.html"><strong>Literature Review Notes</strong></a>
-         
-        </p>
-
-
-                </div>
-              </div>
-
-              <div id="site-categories" class="side-item">
-                <div class="side-header">
-                  <h2>Recent Posts</h2>
-                </div>
-                <div class="side-content">
-                <ul class="posts-list">
-	      
-		      
-			      <li class="post">
-			        <a href="Audio_Visualization.html">Audio visualization</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="16699957214552.html">Reinforcement Learning - Flappy Bird</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="PSD2UMG.html">PSD2UMG</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="Realtime_Glass_Rendering.html">Realtime Glass Rendering</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a>
-			      </li>
-		     
-		  
-		      
-		  
-		      
-		  
-		      
-		   
-		  		</ul>
-                </div>
-              </div>
-        </div><!-- sidebar -->
-      </div><!-- hide for small -->
-</div><!-- large 4 -->
-
-</div><!-- row -->
-
+    </div>
+</div>              
  <div class="page-bottom clearfix">
   <div class="row">
    <p class="copyright">Copyright &copy; 2015

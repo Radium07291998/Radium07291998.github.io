@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Audio visualization - Radium's Website
+  Technical Solution for Audio visualization - Radium's Website
   
   </title>
   
@@ -95,39 +95,19 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
+	$(function(){
+		var currentURL = 'Technical_Solution_for_Audio_visualization.html';
+		currentURL = currentURL.substr(0,currentURL.length-5);
+		$('#menu_item_'+currentURL).addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>Audio visualization</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">01/10/2023</span>
 
-          <span>posted in&nbsp;</span> 
-          
-              <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
-           
-         
-          <span class="comments">
-            
+    <div id="single-page-wrap">
+        <h1>Technical Solution for Audio visualization</h1>
 
-            
-          </span>
-
-        </div>
-      </div><!-- article -->
-
-      <div class="article-content">
-      <h1><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
-<p><a href="https://codepen.io/RadiumLZhang/full/xxJgzQJ">WebGL Waveform</a><br />
-<a href="https://codepen.io/RadiumLZhang/full/KKBaerW">Canvas Bar chart</a></p>
-<h2><a id="waves" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Waves</h2>
+        <div class="markdown-body post-page">
+        <h2><a id="waves" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Waves</h2>
 <ul>
 <li>
 <p>Sound is produced by the vibration of an object, and this vibration is transmitted through a medium to our ears causing the eardrum to vibrate so that we can hear the sound.</p>
@@ -142,8 +122,8 @@
 <p>Amplitude is the maximum displacement value, which corresponds to the volume, the greater the amplitude, the louder the sound.</p>
 </li>
 </ul>
-<p><figure><img src="media/16732874729435/16732876989306.png" alt="" /></figure>The above figure is a sine wave plotted with matplot, which shows that it oscillates 2 times in 0.01s, so the frequency is 200 and the amplitude is 1.</p>
-<pre class="line-numbers"><code class="language-python">from matplotlib import pyplot as plt
+<p><img src="media/16732874729435/16732876989306.png" alt="" />The above figure is a sine wave plotted with matplot, which shows that it oscillates 2 times in 0.01s, so the frequency is 200 and the amplitude is 1.</p>
+<pre><code class="language-python">from matplotlib import pyplot as plt
 import numpy as np
 
 def sin_wave(hz):
@@ -175,7 +155,7 @@ sin_wave(200)
 <li>
 <p>The sound we hear in the real world is not a pure tone, but the result of superimposing various pure tones.</p>
 <p>In the picture below, blue is 200hz, yellow is 800hz, and green is the result of their superposition and is no longer a pure tone.<br />
-<figure><img src="media/16732874729435/16732876989330.png" alt="" /></figure></p>
+<img src="media/16732874729435/16732876989330.png" alt="" /></p>
 </li>
 </ul>
 <audio controls="controls">
@@ -202,11 +182,11 @@ The sounds we hear in daily life are the result of superposition of various pure
 </li>
 <li>
 <p>This is the original sound.<br />
-<figure><img src="media/16732874729435/16732876989343.png" alt="" /></figure></p>
+<img src="media/16732874729435/16732876989343.png" alt="" /></p>
 </li>
 <li>
 <p>This is the result after sampling.<br />
-<figure><img src="media/16732874729435/16732876989350.png" alt="" /></figure></p>
+<img src="media/16732874729435/16732876989350.png" alt="" /></p>
 </li>
 <li>
 <p>By sampling, we turn an endless sequence into a finite sequence where each value is called a sample so that it can be easily stored in the computer.</p>
@@ -236,7 +216,7 @@ The sounds we hear in daily life are the result of superposition of various pure
 <p>We can read WAV audio through scipy.</p>
 </li>
 </ul>
-<pre class="line-numbers"><code class="language-python">import scipy.io.wavfile as wav
+<pre><code class="language-python">import scipy.io.wavfile as wav
 
 rate, all_samples = wav.read(&quot;xxx.wav&quot;)
 
@@ -253,13 +233,13 @@ print(all_samples[:20])
 <h2><a id="fourier-transform" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fourier Transform</h2>
 <ul>
 <li>Given a 200hz waveform and an 800hz waveform, calculating the result after superimposing them is very simple.<br />
-<figure><img src="media/16732874729435/16732876989330.png" alt="" /></figure></li>
+<img src="media/16732874729435/16732876989330.png" alt="" /></li>
 <li>But what if the result is given after superposition?<br />
-<figure><img src="media/16732874729435/16732876989362.png" alt="" /></figure></li>
+<img src="media/16732874729435/16732876989362.png" alt="" /></li>
 </ul>
 <p>With the Fourier transform, we can disassemble a composite waveform into the simple waveforms that make it up.</p>
 <p>We can think of the Fourier transform as a function whose input is N real numbers, representing sampled values, and whose output is N complex numbers, representing components at different frequencies. Here we ignore the real and imaginary parts of the complex numbers and only care about its mode, i.e., the absolute value.</p>
-<pre class="line-numbers"><code class="language-python">from scipy.fft import fft, fftfreq
+<pre><code class="language-python">from scipy.fft import fft, fftfreq
 
 # This is the sample value that will be transformed:  [0, 1, 2, 3, 4, 5, 6, 7]
 samples = np.arange(8)
@@ -293,7 +273,7 @@ print(x)
 <p>The above code constructs a Fourier transform of 8 numbers and assumes that the set of samples is sampled using a sampling rate of 8.</p>
 <p>The result of the transform is 8 complex numbers, which correspond to 8 frequencies, and we can see that the positive and negative frequencies correspond to the same transform result, i.e. the transform result is symmetric.</p>
 <p>The result obtained above is not very meaningful, because the input is not very meaningful. Now let's use the Fourier transform to process the waveform after the 200hz+800hz superposition and see if it can be restored to 200hz and 800hz.</p>
-<pre class="line-numbers"><code class="language-python">import numpy as np
+<pre><code class="language-python">import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.pyplot import figure
 from scipy.fft import fft, fftfreq
@@ -324,7 +304,7 @@ plt.show()
 <p>As we can see in the figure, firstly, the output is symmetrical to the left and right, so we ignore the negative frequencies and focus only on the positive ones.</p>
 <p>Secondly, the Fourier transform tells us that the input signal consists of 2 frequencies, which can be seen as 200 and 800 when the program is running with the mouse over it. i.e., by using the Fourier transform, we break up the composite waveform into a simple waveform.</p>
 <p>Or, by Fourier transforming a signal, we split it into a set of sine waves of different frequencies, transforming it from the time domain to the frequency domain. The signal is still the same signal, but we look at it from a different perspective.</p>
-<p><figure><img src="media/16732874729435/16732876989369.png" alt="" /></figure></p>
+<p><img src="media/16732874729435/16732876989369.png" alt="" /></p>
 <ul>
 <li>To summarize.</li>
 </ul>
@@ -333,7 +313,7 @@ The specific frequency of each number can be calculated based on the number of s
 We do not care about the direction of the complex numbers, we only care about the mode of the complex numbers<br />
 The Fourier output is left-right symmetric, so only half of the information is of value<br />
 Since the output is symmetric, only half of the information has value, so there is a variant called rfft, which returns only half of the information and can be computed faster.</p>
-<pre class="line-numbers"><code class="language-python">import numpy as np
+<pre><code class="language-python">import numpy as np
 from scipy.fft import rfft, rfftfreq
 
 SAMPLE_RATE = 8
@@ -373,7 +353,7 @@ for i in y:
 <li>Next, let's implement a simple audio visualization tool using the Web.</li>
 </ol>
 <h4><a id="1%EF%BC%8Cfirst-parsing-the-audio-file-to-get-allsamples-we-can-use-the-webaudio-api" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1，First, parsing the audio file to get allSamples we can use the WebAudio API.</h4>
-<pre class="line-numbers"><code class="language-python">// Get the binary data of an audio file
+<pre><code class="language-python">// Get the binary data of an audio file
 const ab = fetch(&quot;xxx.mp3&quot;).then(res =&gt; res.arrayBuffer())
 
 // New WebAudio context
@@ -400,7 +380,7 @@ console.log(allSamples.slice(0, 10))
 </code></pre>
 <h4><a id="2%EF%BC%8Cnext-we-use-requestanimationframe-to-draw" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2，Next, we use <code>requestAnimationFrame</code> to draw.</h4>
 <p>Each time we draw, we need to get the current playback position. audioBuffer has the total time of the audio, through <code>audioCtx.currentTime</code> we can find out the current playback time, and divide the two together to get the playback position.</p>
-<pre class="line-numbers"><code class="language-javascript=">// On User Click
+<pre><code class="language-javascript=">// On User Click
 const onPlay = () =&gt; {
   // Record the start time
   const startTime = audioCtx.currentTime
@@ -424,7 +404,7 @@ const onPlay = () =&gt; {
 }
 </code></pre>
 <h4><a id="3%EF%BC%8Cafter-fft-we-get-1025-complex-numbers-and-modulo-these-complex-numbers-we-get-1025-real-numbers" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3，After FFT, we get 1025 complex numbers, and modulo these complex numbers, we get 1025 real numbers.</h4>
-<pre class="line-numbers"><code class="language-javascript=">// Define Complex Class
+<pre><code class="language-javascript=">// Define Complex Class
 class Complex {
   constructor(real, imag) {
     this.real = real
@@ -459,10 +439,10 @@ const y = rfft(samples).map(c =&gt; c.abs())
 
 </code></pre>
 <h4><a id="4%EF%BC%8Cthe-next-step-is-to-map-these-numbers-to-the-0-1-interval" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4，The next step is to map these numbers to the 0 ~ 1 interval.</h4>
-<pre class="line-numbers"><code class="language-javascript">const result = y.map(v =&gt; (v + 20) / 80)
+<pre><code class="language-javascript">const result = y.map(v =&gt; (v + 20) / 80)
 </code></pre>
 <h4><a id="5-once-we-have-a-set-of-numbers-from-0-to-1-we-can-use-canvas-to-draw" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Once we have a set of numbers from 0 to 1, we can use Canvas to draw.</h4>
-<pre class="line-numbers"><code class="language-javascript=">const W = 800 // canvas width
+<pre><code class="language-javascript=">const W = 800 // canvas width
 const H = 600 // canvas height
 
 const draw = (spectrum) =&gt; {
@@ -480,139 +460,9 @@ const draw = (spectrum) =&gt; {
 }
 </code></pre>
 
-
-    
-
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-        </p>
         </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="16699957214552.html" 
-          title="Next Post: Reinforcement Learning - Flappy Bird">Reinforcement Learning - Flappy Bird &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
-
-
-
-
- <div class="large-4 medium-4 columns">
-  <div class="hide-for-small">
-    <div id="sidebar" class="sidebar">
-          <div id="site-info" class="site-info">
-            
-                <div class="site-a-logo"><img src="https://raw.githubusercontent.com/RadiumLZhang/RadiumLZhang.github.io/main/profile/20221024203511.jpg" /></div>
-            
-                <h1>Radium's Website</h1>
-                <div class="site-des"></div>
-                <div class="social">
-
-
-
-<a target="_blank" class="linkedin" href="https://www.linkedin.com/in/lei-zhang-19140715a/" title="LinkedIn">LinkedIn</a>
-
-
-
-
-
-<a target="_blank" class="github" target="_blank" href="https://github.com/RadiumLZhang" title="GitHub">GitHub</a>
-
-  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
-                
-              	 </div>
-          	</div>
-
-             
-
-              <div id="site-categories" class="side-item ">
-                <div class="side-header">
-                  <h2>Categories</h2>
-                </div>
-                <div class="side-content">
-
-      	<p class="cat-list">
-        
-            <a href="Portfolios.html"><strong>Portfolios</strong></a>
-        
-            <a href="Literature_Review_Notes.html"><strong>Literature Review Notes</strong></a>
-         
-        </p>
-
-
-                </div>
-              </div>
-
-              <div id="site-categories" class="side-item">
-                <div class="side-header">
-                  <h2>Recent Posts</h2>
-                </div>
-                <div class="side-content">
-                <ul class="posts-list">
-	      
-		      
-			      <li class="post">
-			        <a href="Audio_Visualization.html">Audio visualization</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="16699957214552.html">Reinforcement Learning - Flappy Bird</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="PSD2UMG.html">PSD2UMG</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="Realtime_Glass_Rendering.html">Realtime Glass Rendering</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a>
-			      </li>
-		     
-		  
-		      
-		  
-		      
-		  
-		      
-		   
-		  		</ul>
-                </div>
-              </div>
-        </div><!-- sidebar -->
-      </div><!-- hide for small -->
-</div><!-- large 4 -->
-
-</div><!-- row -->
-
+    </div>
+</div>              
  <div class="page-bottom clearfix">
   <div class="row">
    <p class="copyright">Copyright &copy; 2015

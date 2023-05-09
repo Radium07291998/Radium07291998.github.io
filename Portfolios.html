@@ -104,368 +104,37 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="Audio_Visualization.html">
+                <a class="clearlink" href="Glass_Material_Rendering.html">
                 
-                  <h1>Audio visualization</h1>
+                  <h1>Glass Material Rendering</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
-<p><a href="https://codepen.io/RadiumLZhang/full/xxJgzQJ">WebGL Waveform</a><br />
-<a href="https://codepen.io/RadiumLZhang/full/KKBaerW">Canvas Bar chart</a></p>
-<h2><a id="waves" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Waves</h2>
+                        	<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<p><img src="media/16836605773902/16836606921706.jpg" alt="" /></p>
+<h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+<p>I present a low-cost glass material rendering solution for Unity3D. I address the challenges of real-time glass rendering, particularly the simulation of reflection and refraction effects. By utilizing MatCap textures and a flexible shader implementation, I provide an efficient and portable method for achieving realistic glass materials.</p>
+<h2><a id="motivation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
+<p>Glass materials have always been challenging to render in real-time, especially on resource-constrained devices. This portfolio showcases the limitations of existing glass rendering techniques in popular console games like <em>Final Fantasy VII Remake</em> and <em>Red Dead Redemption 2</em>. I aim to overcome these limitations and offer a more accurate and visually appealing glass material rendering solution.</p>
+<h2><a id="problem" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem</h2>
+<p>Glass materials involve two key components: reflection and refraction. Simulating these effects in real-time is computationally intensive, leading to suboptimal results on devices with limited performance capabilities. I tackle the challenge of achieving realistic glass refraction, which is crucial for accurately depicting the visual distortion caused by the thickness of the glass.</p>
+<h2><a id="code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h2>
+<p>The complete C# code for implementing the glass material rendering shader in Unity3D can be found on my GitHub repository. The code includes sections for handling environmental highlights reflection and glass refraction, along with the addition of normal details to enhance surface realism.</p>
+<h2><a id="results" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h2>
+<p>The portfolio showcases real-time screenshots from Unity3D demonstrating the effectiveness of the glass material rendering solution. The screenshots display glass objects with accurate reflection and refraction effects, providing a visually appealing rendering outcome.</p>
+<h2><a id="discussion-more-advanced-usages" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Discussion: More Advanced Usages</h2>
+<p>The portfolio goes beyond the basic glass material rendering and explores more advanced applications. It covers techniques for creating frosted glass, handling multiple layers of glass and liquids, and achieving a cracked ice effect on glass surfaces. These advanced usages demonstrate the flexibility and versatility of the implemented glass material rendering solution.</p>
+<h2><a id="caveats" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Caveats</h2>
+<p>It's important to note that this portfolio is not an academic research article but rather a practical implementation of glass material rendering in Unity3D. The solution focuses on visual aspects rather than complex algorithms or ray tracing techniques. The portfolio is intended to inspire and provide a starting point for developers looking to improve their glass material rendering in real-time scenarios.</p>
+<h2><a id="references-tutorials" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>References &amp; Tutorials</h2>
 <ul>
-<li>
-<p>Sound is produced by the vibration of an object, and this vibration is transmitted through a medium to our ears causing the eardrum to vibrate so that we can hear the sound.</p>
-</li>
-<li>
-<p>We can describe vibration in terms of a waveform, where the horizontal axis is time and the vertical axis is the displacement of the vibration, i.e., the distance from the origin.</p>
-</li>
-<li>
-<p>The two key properties of vibration are frequency and amplitude. Frequency refers to how many times a second it vibrates, which corresponds to the pitch of the sound, the higher the frequency the sharper and harsher the sound.</p>
-</li>
-<li>
-<p>Amplitude is the maximum displacement value, which corresponds to the volume, the greater the amplitude, the louder the sound.</p>
-</li>
+<li>YouTube Tutorial: <a href="https://www.youtube.com/watch?v=Yg5ULaS2jMk">MATCAP textures</a></li>
+<li>Unity Wiki: <a href="http://wiki.unity3d.com/index.php/MatCap">MatCap Tutorials</a></li>
 </ul>
-<p><figure><img src="media/16732874729435/16732876989306.png" alt="" /></figure>The above figure is a sine wave plotted with matplot, which shows that it oscillates 2 times in 0.01s, so the frequency is 200 and the amplitude is 1.</p>
-<pre class="line-numbers"><code class="language-python">from matplotlib import pyplot as plt
-import numpy as np
-
-def sin_wave(hz):
-  x = np.linspace(0, 0.01, 1000, endpoint=False)
-  y = np.sin(x * hz * 2 * np.pi)
-  plt.plot(x, y)
-  plt.xlabel(&quot;Time&quot;)
-  plt.axhline(y=0, color='k')
-  plt.show()
-
-sin_wave(200)
-</code></pre>
-<p>This simplest waveform corresponds to a sound called pure tone, which, as the name suggests, is very simple and pure.</p>
-<ul>
-<li>Here is a 200hz sound generated with <a href="https://www.scipy.org/">scipy</a>.</li>
-</ul>
-<audio controls="controls">
-  <source type="audio/wav" src="media/16732874729435/200hz.wav"></source>
-  <p>Your browser does not support the audio element.</p>
-</audio>
-<ul>
-<li>This is the sound at 800hz, and you can clearly feel that the sound is much sharper.</li>
-</ul>
-<audio controls="controls">
-  <source type="audio/wav" src="media/16732874729435/800hz.wav"></source>
-  <p>Your browser does not support the audio element.</p>
-</audio>
-<ul>
-<li>
-<p>The sound we hear in the real world is not a pure tone, but the result of superimposing various pure tones.</p>
-<p>In the picture below, blue is 200hz, yellow is 800hz, and green is the result of their superposition and is no longer a pure tone.<br />
-<figure><img src="media/16732874729435/16732876989330.png" alt="" /></figure></p>
-</li>
-</ul>
-<audio controls="controls">
-  <source type="audio/wav" src="media/16732874729435/mixed.wav"></source>
-  <p>Your browser does not support the audio element.</p>
-</audio>
-<ul>
-<li>To summarize.<br />
-We can represent a sound as a waveform, where the X-axis is time and the Y-axis is the displacement of the vibration<br />
-The simplest sine wave corresponds to a sound called pure tone<br />
-The sounds we hear in daily life are the result of superposition of various pure tones</li>
-</ul>
-<blockquote>
-<p>Tip:<br />
-<a href="https://www.lightnote.co/music-theory/sound-waves">LIGHTNOTE</a> is great website to learn music theory. It introduces basic music theory in an interactive format, including scales, chords, twelve mean meters, etc.</p>
-</blockquote>
-<h2><a id="sampling" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sampling</h2>
-<ul>
-<li>
-<p>Because sound is a continuous function over time, there are an infinite number of values in any given interval, and there is no way to store an infinite amount of data in a computer.</p>
-</li>
-<li>
-<p>To store it, we need to discretize it into a discrete sequence, and the specific way to do this is to sample it, using a fixed interval to evaluate the function.</p>
-</li>
-<li>
-<p>This is the original sound.<br />
-<figure><img src="media/16732874729435/16732876989343.png" alt="" /></figure></p>
-</li>
-<li>
-<p>This is the result after sampling.<br />
-<figure><img src="media/16732874729435/16732876989350.png" alt="" /></figure></p>
-</li>
-<li>
-<p>By sampling, we turn an endless sequence into a finite sequence where each value is called a sample so that it can be easily stored in the computer.</p>
-</li>
-<li>
-<p>There are two key parameters of sampling, which are sampling frequency and sampling depth.</p>
-</li>
-<li>
-<p>Sampling frequency refers to how many times per second a sample is taken. Obviously, the higher the sampling frequency, the more samples, the larger the amount of data, and also the closer to the original sound.</p>
-</li>
-<li>
-<p>Sampling depth refers to how many bits are used to store the sampled values, the more bits are used, the more detailed the restored sound is, and the color depth of the picture is the same reason.</p>
-</li>
-<li>
-<p>Suppose we use a sampling depth of 16bit and a sampling frequency of 44100, then a one-second sound becomes an int16 array of 44100.</p>
-</li>
-<li>
-<p>After we get the array of sample values, how to store the array is the domain of encoding. We can store it directly, or we can use some algorithm to compress it and store it later. There are various ways to do this, corresponding to various audio formats, such as MP3, AAC, WAV, and so on.</p>
-</li>
-<li>
-<p>The AAC and MP3 formats are lossy, which means that when stored and then read out, there will be some differences between the samples and the original, but these differences are subtle and can be ignored. The characteristic of lossy is to reduce the file size significantly without affecting the final playback effect.</p>
-</li>
-<li>
-<p>WAV, on the other hand, is lossless in the sense that whatever is input is what is read out, but naturally the disadvantage is that it is much larger.</p>
-</li>
-<li>
-<p>We can read WAV audio through scipy.</p>
-</li>
-</ul>
-<pre class="line-numbers"><code class="language-python">import scipy.io.wavfile as wav
-
-rate, all_samples = wav.read(&quot;xxx.wav&quot;)
-
-print(rate, len(all_samples), all_samples.dtype)
-# 44100 10639873 int16
-# Above are: the sample rate, the total number of samples, and the type of sample value
-# int16 means that each sample is a 16bit integer
-print(all_samples[:20])
-# [-41 -51 -49 -41 -28 -15 -20 -33 -32 -38 -54 -54 -44 -30  -8  10  11   2
-# -14 -36]
-# the sample is a set of numbers
-</code></pre>
-<p>As we can see, the sampling frequency is 44100 and there are 10639873 samples, which are stored using int16.</p>
-<h2><a id="fourier-transform" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fourier Transform</h2>
-<ul>
-<li>Given a 200hz waveform and an 800hz waveform, calculating the result after superimposing them is very simple.<br />
-<figure><img src="media/16732874729435/16732876989330.png" alt="" /></figure></li>
-<li>But what if the result is given after superposition?<br />
-<figure><img src="media/16732874729435/16732876989362.png" alt="" /></figure></li>
-</ul>
-<p>With the Fourier transform, we can disassemble a composite waveform into the simple waveforms that make it up.</p>
-<p>We can think of the Fourier transform as a function whose input is N real numbers, representing sampled values, and whose output is N complex numbers, representing components at different frequencies. Here we ignore the real and imaginary parts of the complex numbers and only care about its mode, i.e., the absolute value.</p>
-<pre class="line-numbers"><code class="language-python">from scipy.fft import fft, fftfreq
-
-# This is the sample value that will be transformed:  [0, 1, 2, 3, 4, 5, 6, 7]
-samples = np.arange(8)
-
-# The result after FFT
-y = fft(samples)
-
-for i in y:
-  print(i)
-
-# The result of the transformation is 8 complex numbers
-# (28-0j)
-# (-3.9999999999999996+9.65685424949238j)
-# (-4+4j)
-# (-4+1.6568542494923797j)
-# (-4-0j)
-# (-4-1.6568542494923797j)
-# (-4-4j)
-# (-3.9999999999999996-9.65685424949238j)
-
-# x is the frequency corresponding to each of the above results
-# Here the first argument of the fftfreq function is the number of samples
-# The second parameter is the inverse of the sampling rate, which we assume to be 8
-x = fftfreq(len(samples), 1 / 8)
-
-print(x)
-# [ 0.  1.  2.  3. -4. -3. -2. -1.]
-# Here it means that y[0] corresponds to a frequency of 0 and y[1] corresponds to a frequency of 1
-# What does it mean to have a negative frequency? [ignore]
-</code></pre>
-<p>The above code constructs a Fourier transform of 8 numbers and assumes that the set of samples is sampled using a sampling rate of 8.</p>
-<p>The result of the transform is 8 complex numbers, which correspond to 8 frequencies, and we can see that the positive and negative frequencies correspond to the same transform result, i.e. the transform result is symmetric.</p>
-<p>The result obtained above is not very meaningful, because the input is not very meaningful. Now let's use the Fourier transform to process the waveform after the 200hz+800hz superposition and see if it can be restored to 200hz and 800hz.</p>
-<pre class="line-numbers"><code class="language-python">import numpy as np
-from matplotlib import pyplot as plt
-from matplotlib.pyplot import figure
-from scipy.fft import fft, fftfreq
-
-figure(figsize=(14, 6), dpi=80)
-
-DURATION = 0.01
-SAMPLE_RATE = 44100
-
-def gen_sine_wave(freq):
-  x = np.linspace(0, DURATION, int(DURATION * SAMPLE_RATE), endpoint=False)
-  y = np.sin(x * freq * 2 * np.pi)
-  return y
-
-hz200 = gen_sine_wave(200)
-hz800 = gen_sine_wave(800)
-
-# ampling data after superposition
-# Here each sample is not int16 but float
-total = hz200 + hz800
-
-y = fft(total)
-x = fftfreq(len(total), 1 / SAMPLE_RATE)
-
-plt.plot(x, np.abs(y))
-plt.show()
-</code></pre>
-<p>As we can see in the figure, firstly, the output is symmetrical to the left and right, so we ignore the negative frequencies and focus only on the positive ones.</p>
-<p>Secondly, the Fourier transform tells us that the input signal consists of 2 frequencies, which can be seen as 200 and 800 when the program is running with the mouse over it. i.e., by using the Fourier transform, we break up the composite waveform into a simple waveform.</p>
-<p>Or, by Fourier transforming a signal, we split it into a set of sine waves of different frequencies, transforming it from the time domain to the frequency domain. The signal is still the same signal, but we look at it from a different perspective.</p>
-<p><figure><img src="media/16732874729435/16732876989369.png" alt="" /></figure></p>
-<ul>
-<li>To summarize.</li>
-</ul>
-<p>The Fourier transform is a function in which the input string of numbers represents the sample values and the output string of complex numbers represents the frequency components<br />
-The specific frequency of each number can be calculated based on the number of samples and sampling frequency<br />
-We do not care about the direction of the complex numbers, we only care about the mode of the complex numbers<br />
-The Fourier output is left-right symmetric, so only half of the information is of value<br />
-Since the output is symmetric, only half of the information has value, so there is a variant called rfft, which returns only half of the information and can be computed faster.</p>
-<pre class="line-numbers"><code class="language-python">import numpy as np
-from scipy.fft import rfft, rfftfreq
-
-SAMPLE_RATE = 8
-
-samples = np.arange(8)
-
-y = rfft(samples)
-x = rfftfreq(len(samples), 1 / SAMPLE_RATE)
-
-
-print(x)
-# [0. 1. 2. 3. 4.]
-
-for i in y:
-  print(i)
-
-# Comparing with the previous output of fft/fftfreq, the results are the same, except that the symmetric redundancy information is removed
-# (28+0j)
-# (-3.9999999999999996+9.65685424949238j)
-# (-4+4j)
-# (-4+1.6568542494923797j)
-# (-4+0j)
-</code></pre>
-<h2><a id="audio-visualization" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Audio visualization</h2>
-<p>Each bar that beats with the music corresponds to a frequency or a set of frequencies, while the height of the bar is the component size of the frequency, both of which are given by the Fourier transform.</p>
-<p>Now the remaining question is what is the input? We can't take all the samples of a song as input to the Fourier transform, if we did that we would only get one copy of the frequency data.</p>
-<p>We want the frequency data to change with the music, so we choose a window size (FFT_SIZE) of, say, 2048. As the music plays, we select 2048 samples from the current playing position each time and then perform the Fourier transform.</p>
-<ul>
-<li>Now our initial audio visualization scheme is defined.</li>
-</ul>
-<ol>
-<li>Parse the audio file to get allSamples</li>
-<li>In each plot, select FFT_SIZE samples starting from the current sample</li>
-<li>Perform Fourier transform on these samples</li>
-<li>Modulate the complex numbers obtained from the transform</li>
-<li>Transform the result to 0 ~ 1 and plot it</li>
-<li>Next, let's implement a simple audio visualization tool using the Web.</li>
-</ol>
-<h4><a id="1%EF%BC%8Cfirst-parsing-the-audio-file-to-get-allsamples-we-can-use-the-webaudio-api" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1，First, parsing the audio file to get allSamples we can use the WebAudio API.</h4>
-<pre class="line-numbers"><code class="language-python">// Get the binary data of an audio file
-const ab = fetch(&quot;xxx.mp3&quot;).then(res =&gt; res.arrayBuffer())
-
-// New WebAudio context
-const audioCtx = new AudioContext()
-
-// Parse arrayBuffer
-const audioBuffer = audioCtx.decodeAudioData(ab)
-
-console.log(audioBuffer)
-// AudioBuffer {length: 10639872, duration: 241.2669387755102, sampleRate: 44100, numberOfChannels: 2}
-//  duration: 241.2669387755102
-//  length: 10639872
-//  numberOfChannels: 2
-//  sampleRate: 44100
-// [[Prototype]]: AudioBuffer
-
-// Generally audio is available in multiple channels for stereo playback
-// Here we simplified the question by select the first channel
-const allSamples = audioBuffer.getChannelData(0)
-
-// allSamplesis the array of samples we want, each sample value is a float number
-console.log(allSamples.slice(0, 10))
-// Float32Array(10) [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-</code></pre>
-<h4><a id="2%EF%BC%8Cnext-we-use-requestanimationframe-to-draw" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2，Next, we use <code>requestAnimationFrame</code> to draw.</h4>
-<p>Each time we draw, we need to get the current playback position. audioBuffer has the total time of the audio, through <code>audioCtx.currentTime</code> we can find out the current playback time, and divide the two together to get the playback position.</p>
-<pre class="line-numbers"><code class="language-javascript=">// On User Click
-const onPlay = () =&gt; {
-  // Record the start time
-  const startTime = audioCtx.currentTime
-
-  const draw = () =&gt; {
-    requestAnimationFrame(draw)how long have been played
-
-    // the playing time (in seconds)
-    const cur = audioCtx.currentTime - startTime
-
-    // the percentage of playing progress
-    const per = cur / audioBuffer.duration
-
-    const startIndex = Math.floor(allSamples.length * per)
-
-    // From startIndex get FFT_SIZE samples which are to be Fourier transformed
-    const samples = allSamples.slice(startIndex, startIndex + FFT_SIZE)
-  }
-
-  requestAnimationFrame(draw)
-}
-</code></pre>
-<h4><a id="3%EF%BC%8Cafter-fft-we-get-1025-complex-numbers-and-modulo-these-complex-numbers-we-get-1025-real-numbers" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3，After FFT, we get 1025 complex numbers, and modulo these complex numbers, we get 1025 real numbers.</h4>
-<pre class="line-numbers"><code class="language-javascript=">// Define Complex Class
-class Complex {
-  constructor(real, imag) {
-    this.real = real
-    this.imag = imag
-  }
-
-  abs() {
-    return Math.sqrt(this.real * this.real + this.imag * this.imag)
-  }
-}
-
-const rfft = (samples) =&gt; {
-  const f = new FFTJS(samples.length)
-  const out = f.createComplexArray()
-
-  const N = samples.length / 2 + 1
-
-  f.realTransform(out, samples)
-
-  const value = []
-
-  for(let i = 0; i &lt; N; i++) {
-    value[i] = new Complex(out[2*i+0], out[2*i+1])
-  }
-
-  return value
-}
-
-
-// We get a set of real nums.
-const y = rfft(samples).map(c =&gt; c.abs())
-
-</code></pre>
-<h4><a id="4%EF%BC%8Cthe-next-step-is-to-map-these-numbers-to-the-0-1-interval" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4，The next step is to map these numbers to the 0 ~ 1 interval.</h4>
-<pre class="line-numbers"><code class="language-javascript">const result = y.map(v =&gt; (v + 20) / 80)
-</code></pre>
-<h4><a id="5-once-we-have-a-set-of-numbers-from-0-to-1-we-can-use-canvas-to-draw" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Once we have a set of numbers from 0 to 1, we can use Canvas to draw.</h4>
-<pre class="line-numbers"><code class="language-javascript=">const W = 800 // canvas width
-const H = 600 // canvas height
-
-const draw = (spectrum) =&gt; {
-  ctx.clearRect(0, 0, W, H)
-
-  const barWidth = W / spectrum.length
-
-  for(let i = 0; i &lt; spectrum.length; i++) {
-    const v = spectrum[i]
-    const x = i * barWidth
-    const height = v * H
-    const y = H - height
-    ctx.fillRect(x, y, barWidth, height)
-  }
-}
-</code></pre>
+<h2><a id="more-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Details</h2>
+<p><a href="Realtime_Glass_Rendering.html">Technical Solution for Realtime Glass Rendering</a><br />
+<a href="MatCap.html">MatCap</a></p>
 
                         
                       </div>
@@ -474,7 +143,227 @@ const draw = (spectrum) =&gt; {
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">01/10/2023</span>
+                    <span class="date">05/05/2022</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="Audio%20Visualization.html">
+                
+                  <h1>Audio Visualization</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<p>Check out the following interactive demos to see my audio visualization in action:</p>
+<ul>
+<li><a href="https://codepen.io/RadiumLZhang/full/xxJgzQJ">WebGL Waveform</a></li>
+<li><a href="https://codepen.io/RadiumLZhang/full/KKBaerW">Canvas Bar chart</a></li>
+</ul>
+<h2><a id="about-audio-visualization" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>About Audio Visualization</h2>
+<p>Audio visualization is the art of representing sound waves visually, allowing us to perceive and understand the characteristics of audio in a graphical format. Through my portfolio, I explore the following key concepts:</p>
+<ul>
+<li>Waves: Understanding the properties of sound waves, such as frequency and amplitude, and their representation as waveforms.</li>
+<li>Sampling: Discretizing sound waves by sampling, determining sampling frequency and depth, and storing audio data in different formats.</li>
+<li>Fourier Transform: Breaking down composite waveforms into simple waveforms using the Fourier transform, exploring frequency components and their magnitudes.</li>
+</ul>
+<h2><a id="portfolio-highlights" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Portfolio Highlights</h2>
+<ul>
+<li><strong>WebAudio API</strong>: Leveraging the power of WebAudio API to parse audio files, extract sample data, and perform real-time audio visualization.</li>
+<li><strong>Canvas</strong>: Utilizing the Canvas element to create interactive and dynamic visualizations, such as bar charts that react to the audio.</li>
+<li><strong>JavaScript</strong>: Implementing audio visualization algorithms and techniques using JavaScript, including Fourier transform, data modulation, and visualization rendering.</li>
+</ul>
+<h2><a id="conclusion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+<p>I am passionate about audio visualization and strive to create engaging and immersive experiences through the marriage of sound and visuals. With a solid understanding of audio concepts and expertise in technologies like WebAudio API and Canvas, I am equipped to create stunning visualizations that bring music and sound to life.</p>
+<p>If you're interested in collaborating or exploring more about my work, feel free to reach out. Let's create captivating audio visualizations together!</p>
+<h2><a id="more-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Details</h2>
+<p><a href="Technical_Solution_for_Audio_visualization.html">Technical Solution for Audio visualization</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">01/09/2023</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="PSD2UMG.html">
+                
+                  <h1>PSD2UMG</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p><em>A Novel Solution to Automate UI Reconstruction from Photoshop Design to Unity and Unreal Engine</em></p>
+<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<img src="media/16682382868197/16836575736777.jpg"  width="200">
+<img src="media/16682382868197/16836576722270.jpg"  width="200">
+<h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+<p>PSD2UMG is a comprehensive workflow and toolset designed to streamline the process of converting Photoshop (PSD) designs into user interfaces (UI) in Unity 3D and Unreal Engine. By leveraging advanced algorithms and techniques, PSD2UMG significantly reduces manual labor and increases efficiency in UI reconstruction, enabling game developers to focus more on gameplay and design aspects. This paper presents the rationale, design, and application of PSD2UMG, highlighting its benefits in various stages of the game development process.</p>
+<h2><a id="1-introduction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Introduction</h2>
+<p>The process of reconstructing UIs from Photoshop designs in game engines such as Unity and Unreal Engine has traditionally been time-consuming and labor-intensive. PSD2UMG addresses this issue by providing an automated workflow to convert PSD files into usable UI components in these game engines. The workflow includes three main stages:</p>
+<ul>
+<li>Sensory Tree Generation</li>
+<li>Tree Structure Encoding</li>
+<li>Tree Similarity Calculation</li>
+</ul>
+<h2><a id="2-sensory-tree-generation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Sensory Tree Generation</h2>
+<p>Sensory tree generation involves converting a PSD file into a tree structure that represents the design's hierarchical relationships. PSD2UMG's algorithm utilizes layer metadata to generate a sensory tree accurately.</p>
+<h2><a id="3-tree-structure-encoding" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Tree Structure Encoding</h2>
+<p>Inspired by Huffman encoding, PSD2UMG employs tree structure encoding to represent the tree structure as a string. This abstraction allows for efficient comparison of strings, specifically their prefixes, to determine relationships between nodes in the tree.</p>
+<h2><a id="4-tree-similarity-calculation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Tree Similarity Calculation</h2>
+<p>To evaluate the similarity between UI components, PSD2UMG introduces a tree similarity calculation formula. This metric ranges from 0 to 1, providing a quantitative basis for determining the similarity between different UI elements.</p>
+<h2><a id="5-application-of-psd2umg" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Application of PSD2UMG</h2>
+<p>PSD2UMG has been successfully implemented in both Unity 3D and Unreal Engine. The tool offers a simple and efficient way to reconstruct UIs from Photoshop designs, with the entire process taking less than a minute in most cases. This new workflow greatly reduces the manual labor involved in UI reconstruction and allows game developers to focus on other aspects of the development process.</p>
+<h2><a id="6-future-work-and-extensions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Future Work and Extensions</h2>
+<p>Although PSD2UMG cannot be open-sourced due to company confidentiality, a technical solution will be provided for developers to follow through and realize the PSD2UMG system independently. This approach will allow the broader community to benefit from the workflow and techniques presented in PSD2UMG, fostering innovation and efficiency in the game industry ecosystem.</p>
+<p>In conclusion, PSD2UMG presents a novel solution to automate UI reconstruction from Photoshop designs to Unity and Unreal Engine, greatly enhancing efficiency in the game development process. This innovative toolset has the potential to become an invaluable asset for developers, significantly reducing the time and effort required for UI creation and modification.</p>
+<hr />
+<p>Related Blogs:<br />
+<a href="Technical_Solution_for_PSD2UMG.html">Technical Solution for PSD2UMG</a><br />
+<a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">02/28/2022</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="Free_Casonry.html">
+                
+                  <h1>Free Casonry</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<p><a href="https://youtu.be/c19cobOFF7Y"><img src="https://img.youtube.com/vi/c19cobOFF7Y/maxresdefault.jpg" alt="Video Demo" /></a></p>
+<h2><a id="about" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>About</h2>
+<ul>
+<li>This is an independent, narrative and storytelling management mobile game based on Unity3D Engine.</li>
+<li>Complete code in C# based Unity3D is at <a href="https://github.com/RadiumLZhang/Free-Casonry">Github</a>.</li>
+</ul>
+<h2><a id="overview" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+<p>Players take on the role of cats and run the Cat Masons. The cats will conspire in the ancient European court to try to overthrow the human regime.</p>
+<h2><a id="prize" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prize</h2>
+<img src="media/16682488882823/16691058454114.jpg" alt="drawing" style="width:75px;"/>
+<ul>
+<li>Tencent Minigame Project Gold Award, 2021.</li>
+<li>Tencent Minigame Best Art Award, 2021.</li>
+</ul>
+<hr />
+<p><img src="media/16682488882823/1.gif" alt="" /><img src="media/16682488882823/2.gif" alt="" /><img src="media/16682488882823/3.gif" alt="" /><img src="media/16682488882823/4.gif" alt="" /><img src="media/16682488882823/5.gif" alt="" /><img src="media/16682488882823/6.gif" alt="" /><img src="media/16682488882823/7.gif" alt="" /><img src="media/16682488882823/8.gif" alt="" /><img src="media/16682488882823/9.gif" alt="" /></p>
+<h2><a id="installation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<p><a href="https://github.com/RadiumLZhang/CatClub/releases/tag/v1.0.0">Release Version 1.0.0</a></p>
+<h2><a id="more-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Details</h2>
+<p><a href="https://radiumlzhang.github.io/Free_Casonry_Design_Summary.pdf">Free Casonry Design Summary</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">11/15/2021</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="Rehabilitation_Dream.html">
+                
+                  <h1>Rehabilitation Dream</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p><em>A Virtual Reality-based Rehabilitation System</em></p>
+<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+<p>RehabDream is a virtual reality-based rehabilitation system designed for individuals with neurological disorders such as stroke, brain injury, Parkinson's disease, and aging-related movement impairments. The system aims to provide timely and effective task-oriented self-rehabilitation training by exploring the role of multi-sensory data channel stimulation in reshaping motor functions.</p>
+<h2><a id="innovations-and-practicality" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Innovations and Practicality</h2>
+<p>RehabDream is based on the exploration of the underlying principles of VR technology and its applications in healthcare. It addresses the development needs of the healthcare system and aging-related services in China by studying the role of multi-sensory data channel stimulation feedback in rehabilitation training, the development of adaptive intelligent virtual-reality scenarios, and the quantification of virtual-reality-based training systems.</p>
+<p>The system comprises three components: a whole-body rehabilitation system for overall movement, a hand rehabilitation system for dexterity, and a virtual sensory muscle strength system for mobility. The system establishes a virtual twin by matching kinematic and physiological data, creating personalized training plans, and dynamically editing training scenes. The training plans focus on enhancing specific functional deficits, stimulating individuals to overcome movement limitations and generating feedback results to adapt the next training plan.</p>
+<h2><a id="conclusion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+<p>RehabDream is a digital solution that provides scientific and effective rehabilitation training for home, community, and institutional aging services. It supports the promotion of service-oriented elderly care models and offers technical support and platform support for addressing the challenges of aging-related movement impairments.</p>
+<h2><a id="more-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Details</h2>
+<p><a href="https://github.com/RadiumLZhang/Rehabilitation-Dream">Rehabilitation-Dream GitHub repository</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">05/09/2020</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
@@ -528,64 +417,14 @@ const draw = (spectrum) =&gt; {
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="PSD2UMG.html">
+                <a class="clearlink" href="Package_Delivery_via_Drone.html">
                 
-                  <h1>PSD2UMG</h1>
+                  <h1>Package Delivery via Drone</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2><a id="1-introduction-the-process-to-create-art-assets-in-mobile-development" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Introduction: the process to create art assets in mobile development</h2>
-<p>User Interface (UI) is an important part of any game, and it is the medium through which the game and the player interact. UI enables the conversion and transfer of game-related information from the game's internal form to a form that is understandable and acceptable to the player. In the game field, UI is referred to as UI in Unity 3D and UMG in UE.</p>
-<p>There are several key roles involved in this process, including game planning, interaction design, 2D art design, refactoring, and client application. Each role takes the output of the previous role and produces an output for the next role, in order to create a UI that can be presented to the public.</p>
-<ol>
-<li>Planning the game. This involves deciding what information should be displayed.</li>
-<li>Designing the user interface. This involves creating the look and feel of the game.</li>
-<li>Creating 2D art for the game. This involves creating the visual elements of the game.</li>
-<li>Refactoring the game. This involves making sure the game works properly by connecting the game logic to the user interface.</li>
-<li>Programming the game. This involves connecting the game logic to the user interface and displaying the necessary business information.</li>
-</ol>
-<h2><a id="2-motivation-maximize-efficiency-and-create-top-notch-art-assets-without-repeating-work" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Motivation: maximize efficiency and create top-notch art assets without repeating work</h2>
-<p>When creating 2D artwork for a game project, the process can be broken down into several steps. These steps include exporting the artwork, cutting it into layers, importing the layers into the game project, retrieving the image resources in the project, and exporting it to the client application. This process is extremely labour-intensive and has no room for technological upgrading. Additionally, the artwork requires the maintenance of a list of resources already available to the project, which can lead to resource redundancy. Manual restoration is also prone to deviations in detail that do not match the art design. For example, if the resources are scaled up by 200%, it can be difficult to distinguish between them.</p>
-<p>Many people who create mobile games face similar challenges. To address these issues, I looked into the workflow solutions available today. <a href="PSD2UMG_Motivation.html">PSD2UMG - the existing workflow solutions</a><br />
-However, these approaches all have drawbacks.</p>
-<p>In order to make the UI recovery process more efficient., we need to have a new solution automate much of the tedious and repetitive work, while also providing a high-quality result. Compared to traditional workflows, this solution would drastically reduce the amount of time needed to complete the process, while also ensuring that the artwork is restored accurately and that there are no extra resources in the project.</p>
-<h2><a id="3-solution" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Solution</h2>
-<p>When creating artwork for a project, the resources may be changed in some way. This transformation makes it difficult to use traditional image recognition and image retrieval to match the resources used in the game. To solve this problem, we developed a perceptual hash to identify the mapping relationships between the original and transformed resources.</p>
-<h3><a id="3-1-perceptual-hash" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 Perceptual hash</h3>
-<h4><a id="3-1-1-traditional-hashing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.1 Traditional hashing</h4>
-<p>Hashing is a technique used in traditional cryptography to create a fixed-length output for any given input. This output, known as a hash, is a digestible representation of the original input. Traditional cryptography is designed to be one-way and collision-resistant, meaning that the original input cannot be inferred from the hash and that two different inputs cannot produce the same hash. This sensitivity to bit changes in the input data means that even a small change in the input can result in a seemingly random change in the output. This makes traditional cryptographic hashing algorithms unsuitable for digital image retrieval and matching, as operations such as changes in image format, scaling, rotation, or resolution can lead to drastic changes in the hash value, even though the content of the image remains the same.</p>
-<p>Here are the results of traditional hash functions:</p>
-<table>
-<thead>
-<tr>
-<th>Original Value</th>
-<th>Hash Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FatherAndMotherILoveYou</td>
-<td>d1f3bb50ec8144adbc23fda1ba709dbb</td>
-</tr>
-<tr>
-<td>FatherAndMotherILoveyou</td>
-<td>4e8c13234d9aa2a8b45b8d411fb9ff39</td>
-</tr>
-<tr>
-<td>fatherAndMotherILoveYou</td>
-<td>6bcf71c8b5c9395f70c18393b4284202</td>
-</tr>
-</tbody>
-</table>
-<p>The hash of the file cannot be used to find the resources of the game easily, because the resources have been changed in various ways. If the hash is used directly, it is likely that the matching rate will be low or there may not be a match at all.</p>
-<h4><a id="3-1-2-perceptual-hashing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.2 Perceptual hashing</h4>
-<p>Perceptual hashing is a technique that uses the principles of cryptography to create a fixed-length binary sequence, called a perceptual hash value, for a given digital image. This value is designed to remain the same or vary within a small threshold, even if the image format changes, as long as the content information stays the same. This allows for the comparison of two images to determine if they are perceptually similar. The concept was first proposed in 2001 by Ton Kalker in a paper on Digital Watermarking. [TODO add Reference]</p>
-<p>Our solution proposes a hashing algorithm called Mix-Hashing which is based on traditional perceptual hash functions and structural information. It is supplemented by luminance and channel components, making it robust to image scaling, rotation, nine-pattern stretching, and three-pattern stretching which are common features of in-game resources.</p>
-<p><figure><img src="media/16682382868197/16697088436390.jpg" alt="" /></figure></p>
-<h4><a id="3-1-3-structure-based-perceptual-hash-algorithm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.3 Structure-based perceptual hash algorithm</h4>
-<p>The AVG-Hashing algorithm is a computational method that quickly generates a grayscale average based on statistical features of an image. This process only requires a few pixels to be extracted, making it a very efficient way to generate a perceptual hash. AVG-Hashing is a process for generating a unique perceptual hash sequence from an image. It involves normalizing the image to an 8*8 size, graying out the thumbnail, calculating the average grayscale value of all pixels, extracting features for all pixels and binarizing them, and finally generating the perceptual hash sequence. The sequence is collision-resistant, meaning it is unique to the image.</p>
-<p>TO BE CONTINUE</p>
+                        	<p><a href="https://radiumlzhang.github.io/Package_Delivery_via_Drone.pdf">Package Delivery via Drone</a></p>
 
                         
                       </div>
@@ -594,7 +433,7 @@ However, these approaches all have drawbacks.</p>
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">02/28/2022</span>
+                    <span class="date">12/21/2020</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
@@ -613,372 +452,54 @@ However, these approaches all have drawbacks.</p>
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="Realtime_Glass_Rendering.html">
+                <a class="clearlink" href="Science_Visualization_Everyday.html">
                 
-                  <h1>Realtime Glass Rendering</h1>
+                  <h1>Science Visualization Everyday</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<ul>
-<li><a href="#realtime-glass-rendering">Realtime Glass Rendering</a>
+                        	<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<p><img src="media/16836638384202/16836640336857.jpg" alt="" /></p>
+<p><img src="media/16836643540209/16836654841685.jpg" alt="" /></p>
+<h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+<p>A lightweight communication method for exchanging interactive visual narratives</p>
+<h3><a id="design" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h3>
 <ul>
-<li><a href="#1-abstract">1. Abstract</a></li>
-<li><a href="#2-motivation-low-cost-glass-material-rendering-shader">2. Motivation: Low-cost glass material rendering shader</a></li>
-<li><a href="#3-problem">3. Problem</a></li>
-<li><a href="#4-code">4. Code</a>
+<li>Techniques for creating and exploring interactive lightweight scientific visual narratives</li>
+<li>Techniques for managing and referencing previous visual narratives</li>
+</ul>
+<h3><a id="system" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>System</h3>
 <ul>
-<li><a href="#4-1-environmental-highlights-reflection">4.1 Environmental Highlights Reflection</a></li>
-<li><a href="#4-2-glass-refractionrefraction">4.2 Glass RefractionRefraction</a>
+<li>Easily integratable underlying communication system
 <ul>
-<li><a href="#4-2-1-glass-refraction-mask">4.2.1. Glass refraction MASK</a>
-<ul>
-<li><a href="#a-the-thickness-range-of-the-glass-itself">A. The thickness range of the glass itself</a></li>
-<li><a href="#b-glass-side-thickness">B. Glass side thickness</a></li>
+<li>The system is built on top of emails (no need to set a separate server for this)</li>
 </ul>
 </li>
-<li><a href="#4-2-2-simulate-glass-refraction">4.2.2. Simulate glass refraction</a></li>
-<li><a href="#4-2-3-add-normal-details">4.2.3. Add normal details</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#5-results">5. Results</a></li>
-<li><a href="#6-discussion-more-advanced-usages-about-glass-material">6. Discussion: More advanced usages about glass material</a>
+<li>A protocol for exchanging interactive visual narratives for scientific visualization (flow and volume visualizations, for now)
 <ul>
-<li><a href="#6-1-frosted-glass">6.1 Frosted glass</a></li>
-<li><a href="#6-2-multiple-layers-of-glass-and-liquids">6.2 Multiple layers of glass and liquids</a>
-<ul>
-<li><a href="#6-2-1-add-liquid-material">6.2.1 Add liquid material</a></li>
-<li><a href="#6-2-2-about-render-hierarchy">6.2.2 About Render Hierarchy</a></li>
-</ul>
-</li>
-<li><a href="#6-3-glass-with-cracked-ice-effect">6.3 Glass with cracked ice effect</a>
-<ul>
-<li><a href="#6-3-1-about-the-adaptation-of-pbr-dynamic-environment">6.3.1 About the Adaptation of PBR Dynamic Environment</a></li>
+<li>Allows various types of visualization and communication applications to be linked.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><a href="#7-caveats">7. Caveats</a></li>
-<li><a href="#8-references-tutorials">8. References &amp; Tutorials</a></li>
-</ul>
-</li>
-</ul>
-<h2><a id="1-abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Abstract</h2>
-<p>Due to device performance and calculation limits, we cannot do physical simulation (refraction and reflection) realtime, and most glass materials rendering is basically offline. Hence I come out a very low-overhead way to implement the glass material in Unity3D. This solution is very flexible and portable. It can be applied to PBR only by replacing the light reflection and environment reflection.</p>
-<h2><a id="2-motivation-low-cost-glass-material-rendering-shader" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Motivation: Low-cost glass material rendering shader</h2>
-<p>Making the glass materials in mobile development  is difficult, because the glass contains many features: reflection, refraction, thickness, etc. These characteristics require abundant calculations when rendering in real-time, however due to device performance limits,  even in some console game, the render effect is not ideal. Here are  realtime screenshots from some console game, including <em>Final Fantasy VII Remake</em> and <em>Red Dead Redemption 2</em>. As we can see in these screenshots, these glasses are not perfect - they miss some refraction features.<br />
-<figure><img src="media/16690463295788/16690906338748.jpg" alt="Console Game Glass Effects" /><figcaption>Console Game Glass Effects<figcaption></figure></p>
-<h2><a id="3-problem" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Problem</h2>
-<p>The glass itself is transparent, and there are two main points that affect the texture of the glass:</p>
-<ul>
-<li><strong>Reflection</strong>: glass reflects highlights in the environment.</li>
-<li><strong>Refraction</strong>: the glass thickness influences its refractive level. The thicker, the greater. Note here: the thickness would not influence the refractive index but the refractive visual effect.<br />
-The most difficult part is to figure out the refractive effect. However, in terms of human vision, strong refraction will interrupt the continuity of background. In position with strong refraction effect, things behind can no longer be seen clearly, which will make people feel that 'this area is not completely transparent' .  You can only see a blurring background through the glass.<br />
-<figure><img src="media/16690463295788/16691024311154.jpg" alt="" /></figure></li>
-</ul>
-<p>So I mainly start from this point to simulate the refraction visual effect. In order to improve the rendering performance, I use <strong>MatCap</strong> to sample the environment texture. I have some usage tips at my blog about how to use MatCap. - <a href="MatCap.html">MatCap</a>. You can check it out if you'd like. However, it is very flexible. You can replace PBR's ibl environment and realtime highlights based on your needs.</p>
-<h2><a id="4-code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Code</h2>
-<p>Complete code in C# based Unity3D is at Github.</p>
-<h3><a id="4-1-environmental-highlights-reflection" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 Environmental Highlights Reflection</h3>
-<p>The reflection part is relatively simple. You can process a glass highlight MatCap texture to handle the highlight reflection of the wine glass. On the left is the direct output of MatCap, and on the right is the output of MatCap as alpha.<br />
-<figure><img src="media/16690463295788/16691074450696.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">_SpColor(&quot;Sp Color&quot;, Color) = (1.0,1.0,1.0,1.0)
-// make a texture for highlight part to control the reflection visual effect
-float3 spmatCap= tex2D(_CapTex,matCapuv);
-spmatCap *=_SpColor.rgb
-
-o.color.rgb = spmatCap;
-o.color.a = spmatCap.r;
-</code></pre>
-<h3><a id="4-2-glass-refractionrefraction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2 Glass RefractionRefraction</h3>
-<h4><a id="4-2-1-glass-refraction-mask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.1. Glass refraction MASK</h4>
-<p>Before making refraction effects, first we need to calculate the range of refraction and determine the refraction area where refraction needs to be used.</p>
-<h5><a id="a-the-thickness-range-of-the-glass-itself" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>A. The thickness range of the glass itself</h5>
-<ul>
-<li>We need to pre-process the glass thickness of the glass itself. For example, the bottom of the cup and the mouth of the glass.<br />
-The thickness here can be stored in 2 ways for output:</li>
-<li>Preprocess a thickness texture.</li>
-<li>Output by painting to a vertex color.</li>
-</ul>
-<pre class="line-numbers"><code class="language-c#">float3 thicknessTex= tex2D(_MaskTex, i.uv);
-float sThickness = thicknessTex.r * i.color.r; //Solid glass part of the cup
-</code></pre>
-<p>I store the texture in the R channel, and the other channels can be left for later.<br />
-In this way we can get a manually controllable thickness range.<br />
-<figure><img src="media/16690463295788/16691076730180.jpg" alt="" /></figure></p>
-<h5><a id="b-glass-side-thickness" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>B. Glass side thickness</h5>
-<p>The edge part is calculated here using Finier.</p>
-<pre class="line-numbers"><code class="language-c#">_FenierEdge(&quot;Fenier Range&quot;, Range(-2, 2)) = 0.0
-_FenierIntensity(&quot;Fenier intensity&quot;, Range(0, 10)) = 2.0
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-float3 V = normalize(_WorldSpaceCameraPos - i.worldPos);
-float NoV = dot(N,V);
-
-float EdgeThickness (in float NoV)
-{
-   float ET = saturate((NoV-_FenierEdge)*_FenierIntensity);
-   return ET;
-}
-</code></pre>
-<p>By adjusting the parameters we can get the edge range of the cup.<br />
-<figure><img src="media/16690463295788/16691077191650.jpg" alt="" /></figure></p>
-<p>Finally, combining the two ranges together, we get the complete glass refraction area.<br />
-<figure><img src="media/16690463295788/16691077301576.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">_FenierEdge(&quot;FenierRange&quot;, Range(-2, 2)) = 0.0
-_FenierIntensity(&quot;Fenierintensity&quot;, Range(0, 10)) = 2.0
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-float3 V = normalize(_WorldSpaceCameraPos - i.worldPos);
-float NoV = dot(N,V);
-float3 thicknessTex= tex2D(_MaskTex, i.uv) ;
-float sThickness = thicknessTex.r * i.color.r; //Solid glass part of the cup
-float fThickness = thicknessTex.g;// Thickness of cup Fenir
-
-float EdgeThickness (in float NoV ,in float eThickness )
-{
-   fThickness = (eThickness -0.5)*0.5;
-   float ET = saturate((NoV-_FenierEdge+fThickness)*_FenierIntensity);
-   return 1-ET*eThickness ;
-}
-</code></pre>
-<h4><a id="4-2-2-simulate-glass-refraction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.2. Simulate glass refraction</h4>
-<p>We need to use MatCap with a new UV sampling to simulate glass refraction, because we need to use the refraction mask obtained above to distort this MatCap texture.<br />
-However, you can use the same MatCap texture as the highlight, or you can create a new one separately. I am lazy and use the same one for the highlight</p>
-<p><figure><img src="media/16690463295788/16691077670951.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">float Refintensity = Thickness*_Refintensity;
-float3 rfmatCap = tex2D(_RfCapTex,matCapuv+Refintensity);
-float3 rfmatColor= RFLerpColor(rfmatCap,Thickness) 
-</code></pre>
-<pre class="line-numbers"><code class="language-c#">// Add a custom color parameter to _BaseColor 
-// then you can control the glass body color
-float3 RFLerpColor (in float3 rfmatCap,in float Thickness)
-{
-	float3 c1 = _BaseColor.rgb*0.5;
-	float3 c2 = rfmatCap*_BaseColor.rgb;
-	float cMask = Thickness;
-    Return lerp(c1,c2,cMask ); 
-    // Here you can also *v.color.rgb to control the local color of the glass with the vertex color to create a stained glass effect
-}
-</code></pre>
-<p>After simulating glass refraction, we need to output the refraction MASK we made before  as alpha, and the whole refraction part is finished.<br />
-<figure><img src="media/16690463295788/16691078038152.jpg" alt="" /></figure></p>
-<p>Finally, the reflection and refraction are combined to output the whole effect. We are basically done on this part.<br />
-<figure><img src="media/16690463295788/16691078152738.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">float alpha = saturate(max(spmatCap.r*_SpColor.a ,Thickness)*_BaseColor.a);
-//_SpColor is a separate color control for highlight colors
-// The alpha calculation here is for that the transparency of the highlights can be controlled separately, as well as the transparency of the overall cup
-col.rgb = rfColor+spColor; //combine reflection and refraction
-col.a = alpha;
-</code></pre>
-<h4><a id="4-2-3-add-normal-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.3. Add normal details</h4>
-<p>Because the accuracy of the model in the game is relatively low, in order to improve the surface details, we can also add a normal map. This allows for richer representations.</p>
-<p>Because the above refraction MASK and MatCap mapping are calculated based on N (normal). So here we only need to calculate the normalMap.<br />
-<figure><img src="media/16690463295788/16691078453811.jpg" alt="" /></figure></p>
-<pre class="line-numbers"><code class="language-c#">o.worldTangent =normalize(UnityObjectToWorldNormal(v.tangent));
-o.worldBinormal = cross(o.worldNorm, o.worldTangent) * v.tangent.w;   
-o.uv.zw = TRANSFORM_TEX(v.texcoord.xy,_NormalTex) ; //(give the normals separate UVs so that you can use detail normals.
-You can also use multiple sets of normal textures to blend)
-o.uv.xy = TRANSFORM_TEX(v.texcoord.xy,_MaskTex) ;
-//------↑VSout----------------------------------------------------------------------------------------------
-
-void GetNormal(v2f I, inout float3 N)
-{
-	float4 normalTex = tex2D(_NormalTex, i.uv.zw);
-	float3 normalTS = normalize(UnpackNormal(normalTex));
-	float3x3 tbn = float3x3(i.worldTangent, i.worldBinormal, i.worldNorm);
-	N = normalize(mul(normalTS, tbn));
-}
-</code></pre>
-<p>PS. If you need a more realistic visual effect, you can use an RT to create the effect of the objects behind being refracted and distorted, but in fact, you don't need to add it at all.<br />
-Now we are done our job on realizing glass material. I will discuss more about its usages and give some its application examples in Discussion Part.</p>
-<h2><a id="5-results" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Results</h2>
-<p>All the effect pictures are real-time screenshots in Unity3D, no Tone mapping.<br />
-<figure><img src="media/16690463295788/16690910660905.jpg" alt="" /></figure><br />
-<figure><img src="media/16690463295788/16690911545749.jpg" alt="" /></figure></p>
-<p><figure><img src="media/16690463295788/champagne.gif" alt="champagne" /><figcaption>champagne<figcaption></figure><br />
-<figure><img src="media/16690463295788/beer.gif" alt="beer" /><figcaption>beer<figcaption></figure></p>
-<h2><a id="6-discussion-more-advanced-usages-about-glass-material" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Discussion: More advanced usages about glass material</h2>
-<h3><a id="6-1-frosted-glass" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.1 Frosted glass</h3>
-<p>In fact, frosted glass is very, very simple under MatCap, we only need to take the texture of MatCap into Photoshop for blurring.<br />
-If it is IBL, Phone, GGX and other high-light reflections, it can be processed directly according to the roughness method.<br />
-<figure><img src="media/16690463295788/16691079921428.jpg" alt="" /></figure></p>
-<h3><a id="6-2-multiple-layers-of-glass-and-liquids" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2 Multiple layers of glass and liquids</h3>
-<ul>
-<li>Now I have only done the outer surface of the cup, and the inside of the glass has not been processed yet.</li>
-<li>Take a look at the cup model first, here are some points to note.</li>
-<li>I divided the cup model into 3 parts:
-<ul>
-<li>Cup exterior</li>
-<li>Cup inner wall</li>
-<li>Liquid in a glass</li>
-</ul>
-</li>
-<li>The reason for distinguishing the inner and outer walls is mainly to solve the problem of wrong front-back relationship caused by translucent sorting.<br />
-<figure><img src="media/16690463295788/16691080601660.jpg" alt="" /></figure><br />
-Here we create a new shader, or we can copy a copy of the previous outer wall shader and assign it to the inner wall model of the cup.<br />
-<figure><img src="media/16690463295788/16691080711770.jpg" alt="" /></figure><br />
-Inner wall material: It is recommended to adjust the parameters to remove the edge thickness, unless you are making a double-layer glass. The bottom part of the cup is controlled by the thickness mask (texture and vertex color are fine).</li>
-</ul>
-<h4><a id="6-2-1-add-liquid-material" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2.1 Add liquid material</h4>
-<p>Create a new liquid shader in the same way. Modify the color to make water, beer, red wine or other beverages.<br />
-<figure><img src="media/16690463295788/16691081216596.jpg" alt="" /></figure><br />
-Here, the thickness mask map texture is replaced with a small bubble texture. Used to simulate small bubbles in beer.<br />
-<figure><img src="media/16690463295788/16691081310410.jpg" alt="" /></figure><br />
-At the same time, use animation to sample K keyframes for this texture, and add an animation of UV flow. You can make the effect of beer bubbles flowing.<br />
-<figure><img src="media/16690463295788/16691081423985.jpg" alt="" /></figure></p>
-<h4><a id="6-2-2-about-render-hierarchy" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.2.2 About Render Hierarchy</h4>
-<p><figure><img src="media/16690463295788/16691081559295.jpg" alt="" /></figure></p>
-<p><strong>Translucent material --- needs to modify the RenderQueue of the internal shader to -1 on the parameters of the external material. Otherwise, the context of the depth will be wrong at certain angles or complex models.</strong></p>
-<p>For example: the beer glasses above are rendered in the same order as the <strong>RenderQueue</strong>.</p>
-<p>Cup exterior (3000) ← cup liquid (2999) ← cup interior (2998)<br />
-<strong>Translucent part</strong>: In fact, just arrange them in the order we see them. Because when we see the whole cup, we first see the outer wall, followed by the liquid part, and finally the inner wall part. The smaller the value, the higher the rendering priority.</p>
-<h3><a id="6-3-glass-with-cracked-ice-effect" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.3 Glass with cracked ice effect</h3>
-<p>Use a cracked texture with a vertex color to paint the base thickness of the glass. It can simulate the effect similar to cracked glass.<br />
-<figure><img src="media/16690463295788/16691082062343.jpg" alt="" /></figure></p>
-<h4><a id="6-3-1-about-the-adaptation-of-pbr-dynamic-environment" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6.3.1 About the Adaptation of PBR Dynamic Environment</h4>
-<p>You can mix low-profile colors such as the ball association lighting and LightProbes of the environment with the refraction part, and it can change with the change of the environment color.</p>
-<h2><a id="7-caveats" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. Caveats</h2>
-<ul>
-<li>This is not an academic article.</li>
-<li>The author guarantee that the implementation has no complicated algorithms, no ray tracing, the solution could be without RT, without post-processing.</li>
-<li>This solution is mainly from the visual aspects to achieve the final effect.</li>
-<li>I love to help if you have any other question, idea or problem.</li>
-</ul>
-<h2><a id="8-references-tutorials" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>8. References &amp; Tutorials</h2>
-<p>Youtube MATCAP textures. <a href="https://www.youtube.com/watch?v=Yg5ULaS2jMk">https://www.youtube.com/watch?v=Yg5ULaS2jMk</a><br />
-Unity MatCap Tutorials. <a href="http://wiki.unity3d.com/index.php/MatCap">http://wiki.unity3d.com/index.php/MatCap</a></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">05/05/2022</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="Photoshop_Layer_Normalization_Tool.html">
-                
-                  <h1>Photoshop Layer Normalization Tool</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2><a id="about" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>About</h2>
-<ul>
-<li>This tool is designed for automating merge layers to normalize *<em>.psd</em> file</li>
-<li>It is also a supportive tool designed for <strong>PSD2UMG</strong> plugin</li>
-</ul>
-<h2><a id="purpose" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Purpose</h2>
-<ul>
-<li>The widget trees of Game Engine (UE4 Engine/Unity3D Engine) do not map well with Photoshop file layers, some of PSD features (e.g. the layer set, the mask, and the layer FX) cannot be imported to Game Engine directly.</li>
-<li>The tool could merge some group patterns in *<em>.psd</em> into a single layer, in order to eliminate the features that Game Engine do not support.</li>
-<li>Of course, you could merge these groups manually. That's way too tedious!</li>
-</ul>
-<h2><a id="feature" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feature</h2>
-<ul>
-<li>Currently the tool supports merge the following patterns:
-<ul>
-<li>layers with layer pattern</li>
-<li>layers with clipping mask</li>
-<li>layers with mask</li>
-<li>layer patterns with layer set</li>
-<li>layer set with mask</li>
-<li>empty layer / empty textblock / empty group / empty layer set</li>
-<li>layer set naming with prefix &quot;merge&quot;</li>
-</ul>
-</li>
-<li>Note:
-<ul>
-<li>The source file wouldn't be changed.</li>
-<li>The tool duplicates the source file and generates a new file naming with postfix &quot;_norm&quot;.</li>
-<li>You will be asked to save normalized new file in somewhere you like.</li>
-</ul>
-</li>
-</ul>
-<h2><a id="installation-usage" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation &amp; Usage</h2>
-<ol>
-<li>Install Photoshop CC(or higher version)</li>
-<li>git clone <a href="https://github.com/RadiumLZhang/Photoshop-Layer-Normalization-Tool.git">https://github.com/RadiumLZhang/Photoshop-Layer-Normalization-Tool.git</a></li>
-<li>double click <em>Install.cmd</em></li>
-<li>Restart Photoshop CC</li>
-<li>Top Menu Bar -&gt; File -&gt; Auto -&gt; Normalize for PSD2UI</li>
-</ol>
-<h2><a id="license" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
-<p>This project is licensed under the terms of the MIT license.</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">11/18/2022</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="Free_Casonry.html">
-                
-                  <h1>Free Casonry</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2><a id="about" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>About</h2>
-<ul>
-<li>This is an independent, narrative and storytelling management mobile game based on Unity3D Engine.</li>
-<li>Complete code in C# based Unity3D is at <a href="https://github.com/RadiumLZhang/Free-Casonry">Github</a>.</li>
-</ul>
-<h2><a id="overview" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
-<p>Players take on the role of cats and run the Cat Masons. The cats will conspire in the ancient European court to try to overthrow the human regime.</p>
-<h2><a id="design-summary" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design Summary</h2>
-<p>If you are interested in details, please check out <a href="https://radiumlzhang.github.io/Free_Casonry_Design_Summary.pdf">Free Casonry Design Summary</a> here.</p>
-<h2><a id="prize" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prize</h2>
-<img src="media/16682488882823/16691058454114.jpg" alt="drawing" style="width:75px;"/>
-<ul>
-<li>Tencent Minigame Project Gold Award, 2021.</li>
-<li>Tencent Minigame Best Art Award, 2021.</li>
-</ul>
-<h2><a id="demos" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demos</h2>
-<p><a href="https://youtu.be/c19cobOFF7Y"><figure><img src="https://img.youtube.com/vi/c19cobOFF7Y/maxresdefault.jpg" alt="Video Demo" /><figcaption>Video Demo<figcaption></figure></a></p>
 <hr />
-<p><figure><img src="media/16682488882823/1.gif" alt="" /></figure><figure><img src="media/16682488882823/2.gif" alt="" /></figure><figure><img src="media/16682488882823/3.gif" alt="" /></figure><figure><img src="media/16682488882823/4.gif" alt="" /></figure><figure><img src="media/16682488882823/5.gif" alt="" /></figure><figure><img src="media/16682488882823/6.gif" alt="" /></figure><figure><img src="media/16682488882823/7.gif" alt="" /></figure><figure><img src="media/16682488882823/8.gif" alt="" /></figure><figure><img src="media/16682488882823/9.gif" alt="" /></figure></p>
-<h2><a id="installation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
-<p><a href="https://github.com/RadiumLZhang/CatClub/releases/tag/v1.0.0">Release Version 1.0.0</a></p>
+<p>In this project, I worked on various tasks related to science visualization. Some of the key highlights include:</p>
+<ul>
+<li>
+<p><strong>Creating a Video File from the Story</strong>: Initially using the Unity API CameraScreenShot, I encountered limitations in capturing only the desired video content. To overcome this, I devised a solution using a sub-camera that moved along a defined path to capture specific scenes. I merged the captured screenshots into a video using the ffmpeg plugin, resulting in a seamless video presentation.</p>
+</li>
+<li>
+<p><strong>Integrating 360 Images into the Lite Viewer</strong>: I implemented the integration of 360-degree images into a lightweight viewer. By applying UV mapping algorithms, I successfully mapped the panoramic images onto a sphere, enabling an immersive 360-degree viewing experience. User interaction was achieved through smooth rotation using controller or mouse input.</p>
+</li>
+<li>
+<p><strong>Dynamic Annotation Feature</strong>: I implemented a dynamic annotation feature within the viewer. By utilizing a raycaster and mouse clicks, users could place annotations on specific points of interest in the visualization. The annotations were visually rendered using a separate shader, ensuring independence from the scene.</p>
+</li>
+<li>
+<p><strong>Additional Engineering Development Skills</strong>: In addition to the graphics-related tasks, I also developed various engineering skills. This included integrating Google APIs for uploading and downloading visualization metadata on Google Drive, implementing a listener for drag-and-drop functionality in the viewer across different platforms, and more.</p>
+</li>
+</ul>
+<h2><a id="more-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Details</h2>
+<p><a href="Technical_Solution_for_Everyday_Science_Visualization.html">Technical Solution for Everyday Science Visualization</a></p>
 
                         
                       </div>
@@ -987,7 +508,7 @@ Unity MatCap Tutorials. <a href="http://wiki.unity3d.com/index.php/MatCap">http:
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">11/15/2021</span>
+                    <span class="date">05/09/2019</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
@@ -1078,13 +599,13 @@ Unity MatCap Tutorials. <a href="http://wiki.unity3d.com/index.php/MatCap">http:
 	      
 		      
 			      <li class="post">
-			        <a href="Audio_Visualization.html">Audio visualization</a>
+			        <a href="Glass_Material_Rendering.html">Glass Material Rendering</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="16699957214552.html">Reinforcement Learning - Flappy Bird</a>
+			        <a href="Audio%20Visualization.html">Audio Visualization</a>
 			      </li>
 		     
 		  
@@ -1096,15 +617,19 @@ Unity MatCap Tutorials. <a href="http://wiki.unity3d.com/index.php/MatCap">http:
 		  
 		      
 			      <li class="post">
-			        <a href="Realtime_Glass_Rendering.html">Realtime Glass Rendering</a>
+			        <a href="Free_Casonry.html">Free Casonry</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a>
+			        <a href="Rehabilitation_Dream.html">Rehabilitation Dream</a>
 			      </li>
 		     
+		  
+		      
+		  
+		      
 		  
 		      
 		  

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  About me - Radium's Website
+  Technical Solution for Everyday Science Visualization - Radium's Website
   
   </title>
   
@@ -96,7 +96,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		var currentURL = 'index.html';
+		var currentURL = 'Technical_Solution_for_Everyday_Science_Visualization.html';
 		currentURL = currentURL.substr(0,currentURL.length-5);
 		$('#menu_item_'+currentURL).addClass('is_active');
 	});
@@ -104,22 +104,52 @@
 <div class="row">
 
     <div id="single-page-wrap">
-        <h1>About me</h1>
+        <h1>Technical Solution for Everyday Science Visualization</h1>
 
         <div class="markdown-body post-page">
-        <p>Hi, this is 张镭 ZHANG, Lei.<br />
-How to pronounce my first name &quot;Lei&quot;: &quot;<strong>Lay</strong>&quot;.<br />
-My first name in Chinese (镭) means &quot;Radium&quot;.<br />
-You can either call me  &quot;Radium&quot;.</p>
-<p>I graduated from <a href="https://twin-cities.umn.edu/">University of Minnesota, Twin Cities</a> in 2021 Spring with B.S. in Computer Science and B.S. in Mathematics degrees obtained.</p>
-<p>My focus is on human-computer interaction and machine learning, with the goal of creating an intelligent platform that is driven by user behavior to provide immersive AR/VR scenarios.</p>
-<h4><a id="including-the-following-sub-domains" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Including the following sub-domains:</h4>
+        <h3><a id="a-360-panorama-player" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>A. 360 Panorama Player</h3>
+<p>The goal of this project was to develop a panorama player that could display 360-degree panoramic images, providing an immersive viewing experience. The chosen method for displaying the panorama was through a spherical projection.</p>
+<p>The implementation process involved several steps:</p>
 <ol>
-<li>creating sophisticated models and algorithms to detect physiological signals from various behavioral cues (e.g. voice, facial expressions, language, etc.)</li>
-<li>Using AR/VR/XR technics to create immersive scenarios</li>
-<li>building an intelligent interactive system to guide users through activities</li>
+<li>
+<p>Creating a Sphere: A sphere was created by dividing its surface into numerous small triangles. By sufficiently refining the division, the sphere would appear smooth. The sphere was constructed using a combination of longitudinal and latitudinal lines, forming rectangles that could be treated as two triangles. The vertices were generated using a nested loop iterating over the latitudinal and longitudinal angles.</p>
+</li>
+<li>
+<p>Determining Vertex and Texture Coordinates: The coordinates for the vertices on the sphere's surface were determined using mathematical formulas, taking into account the radius and the angles.</p>
+</li>
+<li>
+<p>Texture Mapping: Texture coordinates (u, v) were used to map the texture onto the sphere's surface. This process, known as UV mapping, involved mapping the vertex coordinates to the corresponding texture coordinates to achieve the desired texture loading.</p>
+</li>
+<li>
+<p>MVP Matrix and Coordinate Transformations: To achieve the immersive 360-degree effect, various matrix transformations were applied to the display coordinates. The Model-View-Projection (MVP) matrix, composed of the ModelMatrix, ViewMatrix, and ProjectionMatrix, was used to project the scene onto the screen. Additionally, clipping was considered to limit the visible area to ensure proper display, although it was not implemented in this project.</p>
+</li>
+<li>
+<p>User Interaction: The sphere could be rotated based on user input, providing an interactive viewing experience. In this implementation, the sphere rotation was controlled by mouse movements. However, the same concept could be applied to sensor-based rotation by obtaining rotation data. The ViewMatrix was updated based on user touch events to update the scene's position and achieve the desired rotation effect.</p>
+</li>
 </ol>
-<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=1&t=n&d=8BW2EHnziunwGV7nzYznbhp6ov40ptDx5OkSVwNBiEU&co=ffffff&cmo=ffffff&cmn=ffffff&ct=ffffff'></script>
+<h3><a id="b-implementation-of-3d-model-annotation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>B. Implementation of 3D Model Annotation</h3>
+<p>The objective of this project was to enable annotation of specific points on a 3D model by mouse clicks, allowing the addition of one or more annotations in the scene. The annotations could be dragged and transformed, maintaining their position relative to the model's animations, translations, and rotations.</p>
+<p>The implementation process involved the following steps:</p>
+<ol>
+<li>
+<p>Raycaster for Annotation Coordinate Selection: The mouse click position, initially in screen coordinates, needed to be transformed into 3D space coordinates. A ray was cast from the camera position through the mouse position, and the intersection point with the model's surface was used as the annotation point in 3D space.</p>
+</li>
+<li>
+<p>Interactive Interaction with WebGL: To add annotations to the scene, a separate shader was created for rendering the annotations independently of the scene. Each annotation was represented by a hotspot, consisting of a mesh and a material. Data information required for rendering, such as position, UV coordinates, color, and index, was passed to the shader. Each hotspot was associated with a hotspot object, binding it to its specific mesh and material.</p>
+</li>
+<li>
+<p>Reusing Mesh and Material: Considering the simplicity of hotspot information, multiple hotspots could share the same mesh and material. By consolidating the meshes and materials of multiple hotspots, the rendering process was optimized, reducing it from multiple iterations to a single operation and improving performance.</p>
+</li>
+<li>
+<p>Vertex Stream Compression: To save space and optimize data transmission to the shader, compression techniques were employed to reduce the redundancy in hotspot data.</p>
+</li>
+<li>
+<p>Hotspot Occlusion: Proper occlusion handling between hotspots and between hotspots and other objects in the scene was considered to ensure correct rendering.</p>
+</li>
+<li>
+<p>Mouse Drag Transformation of Hotspot Positions: When dragging a hotspot, the mouse position needed to be continuously tracked and converted into 3D space coordinates</p>
+</li>
+</ol>
 
         </div>
     </div>

@@ -124,57 +124,34 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2><a id="1-introduction-the-process-to-create-art-assets-in-mobile-development" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Introduction: the process to create art assets in mobile development</h2>
-<p>User Interface (UI) is an important part of any game, and it is the medium through which the game and the player interact. UI enables the conversion and transfer of game-related information from the game's internal form to a form that is understandable and acceptable to the player. In the game field, UI is referred to as UI in Unity 3D and UMG in UE.</p>
-<p>There are several key roles involved in this process, including game planning, interaction design, 2D art design, refactoring, and client application. Each role takes the output of the previous role and produces an output for the next role, in order to create a UI that can be presented to the public.</p>
-<ol>
-<li>Planning the game. This involves deciding what information should be displayed.</li>
-<li>Designing the user interface. This involves creating the look and feel of the game.</li>
-<li>Creating 2D art for the game. This involves creating the visual elements of the game.</li>
-<li>Refactoring the game. This involves making sure the game works properly by connecting the game logic to the user interface.</li>
-<li>Programming the game. This involves connecting the game logic to the user interface and displaying the necessary business information.</li>
-</ol>
-<h2><a id="2-motivation-maximize-efficiency-and-create-top-notch-art-assets-without-repeating-work" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Motivation: maximize efficiency and create top-notch art assets without repeating work</h2>
-<p>When creating 2D artwork for a game project, the process can be broken down into several steps. These steps include exporting the artwork, cutting it into layers, importing the layers into the game project, retrieving the image resources in the project, and exporting it to the client application. This process is extremely labour-intensive and has no room for technological upgrading. Additionally, the artwork requires the maintenance of a list of resources already available to the project, which can lead to resource redundancy. Manual restoration is also prone to deviations in detail that do not match the art design. For example, if the resources are scaled up by 200%, it can be difficult to distinguish between them.</p>
-<p>Many people who create mobile games face similar challenges. To address these issues, I looked into the workflow solutions available today. <a href="PSD2UMG_Motivation.html">PSD2UMG - the existing workflow solutions</a><br />
-However, these approaches all have drawbacks.</p>
-<p>In order to make the UI recovery process more efficient., we need to have a new solution automate much of the tedious and repetitive work, while also providing a high-quality result. Compared to traditional workflows, this solution would drastically reduce the amount of time needed to complete the process, while also ensuring that the artwork is restored accurately and that there are no extra resources in the project.</p>
-<h2><a id="3-solution" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Solution</h2>
-<p>When creating artwork for a project, the resources may be changed in some way. This transformation makes it difficult to use traditional image recognition and image retrieval to match the resources used in the game. To solve this problem, we developed a perceptual hash to identify the mapping relationships between the original and transformed resources.</p>
-<h3><a id="3-1-perceptual-hash" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 Perceptual hash</h3>
-<h4><a id="3-1-1-traditional-hashing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.1 Traditional hashing</h4>
-<p>Hashing is a technique used in traditional cryptography to create a fixed-length output for any given input. This output, known as a hash, is a digestible representation of the original input. Traditional cryptography is designed to be one-way and collision-resistant, meaning that the original input cannot be inferred from the hash and that two different inputs cannot produce the same hash. This sensitivity to bit changes in the input data means that even a small change in the input can result in a seemingly random change in the output. This makes traditional cryptographic hashing algorithms unsuitable for digital image retrieval and matching, as operations such as changes in image format, scaling, rotation, or resolution can lead to drastic changes in the hash value, even though the content of the image remains the same.</p>
-<p>Here are the results of traditional hash functions:</p>
-<table>
-<thead>
-<tr>
-<th>Original Value</th>
-<th>Hash Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FatherAndMotherILoveYou</td>
-<td>d1f3bb50ec8144adbc23fda1ba709dbb</td>
-</tr>
-<tr>
-<td>FatherAndMotherILoveyou</td>
-<td>4e8c13234d9aa2a8b45b8d411fb9ff39</td>
-</tr>
-<tr>
-<td>fatherAndMotherILoveYou</td>
-<td>6bcf71c8b5c9395f70c18393b4284202</td>
-</tr>
-</tbody>
-</table>
-<p>The hash of the file cannot be used to find the resources of the game easily, because the resources have been changed in various ways. If the hash is used directly, it is likely that the matching rate will be low or there may not be a match at all.</p>
-<h4><a id="3-1-2-perceptual-hashing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.2 Perceptual hashing</h4>
-<p>Perceptual hashing is a technique that uses the principles of cryptography to create a fixed-length binary sequence, called a perceptual hash value, for a given digital image. This value is designed to remain the same or vary within a small threshold, even if the image format changes, as long as the content information stays the same. This allows for the comparison of two images to determine if they are perceptually similar. The concept was first proposed in 2001 by Ton Kalker in a paper on Digital Watermarking. [TODO add Reference]</p>
-<p>Our solution proposes a hashing algorithm called Mix-Hashing which is based on traditional perceptual hash functions and structural information. It is supplemented by luminance and channel components, making it robust to image scaling, rotation, nine-pattern stretching, and three-pattern stretching which are common features of in-game resources.</p>
-<p><figure><img src="media/16682382868197/16697088436390.jpg" alt="" /></figure></p>
-<h4><a id="3-1-3-structure-based-perceptual-hash-algorithm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.3 Structure-based perceptual hash algorithm</h4>
-<p>The AVG-Hashing algorithm is a computational method that quickly generates a grayscale average based on statistical features of an image. This process only requires a few pixels to be extracted, making it a very efficient way to generate a perceptual hash. AVG-Hashing is a process for generating a unique perceptual hash sequence from an image. It involves normalizing the image to an 8*8 size, graying out the thumbnail, calculating the average grayscale value of all pixels, extracting features for all pixels and binarizing them, and finally generating the perceptual hash sequence. The sequence is collision-resistant, meaning it is unique to the image.</p>
-<p>TO BE CONTINUE</p>
+      <p><em>A Novel Solution to Automate UI Reconstruction from Photoshop Design to Unity and Unreal Engine</em></p>
+<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<img src="media/16682382868197/16836575736777.jpg"  width="200">
+<img src="media/16682382868197/16836576722270.jpg"  width="200">
+<h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+<p>PSD2UMG is a comprehensive workflow and toolset designed to streamline the process of converting Photoshop (PSD) designs into user interfaces (UI) in Unity 3D and Unreal Engine. By leveraging advanced algorithms and techniques, PSD2UMG significantly reduces manual labor and increases efficiency in UI reconstruction, enabling game developers to focus more on gameplay and design aspects. This paper presents the rationale, design, and application of PSD2UMG, highlighting its benefits in various stages of the game development process.</p>
+<h2><a id="1-introduction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Introduction</h2>
+<p>The process of reconstructing UIs from Photoshop designs in game engines such as Unity and Unreal Engine has traditionally been time-consuming and labor-intensive. PSD2UMG addresses this issue by providing an automated workflow to convert PSD files into usable UI components in these game engines. The workflow includes three main stages:</p>
+<ul>
+<li>Sensory Tree Generation</li>
+<li>Tree Structure Encoding</li>
+<li>Tree Similarity Calculation</li>
+</ul>
+<h2><a id="2-sensory-tree-generation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Sensory Tree Generation</h2>
+<p>Sensory tree generation involves converting a PSD file into a tree structure that represents the design's hierarchical relationships. PSD2UMG's algorithm utilizes layer metadata to generate a sensory tree accurately.</p>
+<h2><a id="3-tree-structure-encoding" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Tree Structure Encoding</h2>
+<p>Inspired by Huffman encoding, PSD2UMG employs tree structure encoding to represent the tree structure as a string. This abstraction allows for efficient comparison of strings, specifically their prefixes, to determine relationships between nodes in the tree.</p>
+<h2><a id="4-tree-similarity-calculation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Tree Similarity Calculation</h2>
+<p>To evaluate the similarity between UI components, PSD2UMG introduces a tree similarity calculation formula. This metric ranges from 0 to 1, providing a quantitative basis for determining the similarity between different UI elements.</p>
+<h2><a id="5-application-of-psd2umg" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Application of PSD2UMG</h2>
+<p>PSD2UMG has been successfully implemented in both Unity 3D and Unreal Engine. The tool offers a simple and efficient way to reconstruct UIs from Photoshop designs, with the entire process taking less than a minute in most cases. This new workflow greatly reduces the manual labor involved in UI reconstruction and allows game developers to focus on other aspects of the development process.</p>
+<h2><a id="6-future-work-and-extensions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Future Work and Extensions</h2>
+<p>Although PSD2UMG cannot be open-sourced due to company confidentiality, a technical solution will be provided for developers to follow through and realize the PSD2UMG system independently. This approach will allow the broader community to benefit from the workflow and techniques presented in PSD2UMG, fostering innovation and efficiency in the game industry ecosystem.</p>
+<p>In conclusion, PSD2UMG presents a novel solution to automate UI reconstruction from Photoshop designs to Unity and Unreal Engine, greatly enhancing efficiency in the game development process. This innovative toolset has the potential to become an invaluable asset for developers, significantly reducing the time and effort required for UI creation and modification.</p>
+<hr />
+<p>Related Blogs:<br />
+<a href="Technical_Solution_for_PSD2UMG.html">Technical Solution for PSD2UMG</a><br />
+<a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a></p>
 
 
     
@@ -185,16 +162,16 @@ However, these approaches all have drawbacks.</p>
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="16699957214552.html" 
-          title="Previous Post: Reinforcement Learning - Flappy Bird">&laquo; Reinforcement Learning - Flappy Bird</a>
+          <a href="Audio%20Visualization.html" 
+          title="Previous Post: Audio Visualization">&laquo; Audio Visualization</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="Realtime_Glass_Rendering.html" 
-          title="Next Post: Realtime Glass Rendering">Realtime Glass Rendering &raquo;</a>
+          <a  href="Free_Casonry.html" 
+          title="Next Post: Free Casonry">Free Casonry &raquo;</a>
       
       </p>
         </div>
@@ -269,13 +246,13 @@ However, these approaches all have drawbacks.</p>
 	      
 		      
 			      <li class="post">
-			        <a href="Audio_Visualization.html">Audio visualization</a>
+			        <a href="Glass_Material_Rendering.html">Glass Material Rendering</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="16699957214552.html">Reinforcement Learning - Flappy Bird</a>
+			        <a href="Audio%20Visualization.html">Audio Visualization</a>
 			      </li>
 		     
 		  
@@ -287,15 +264,19 @@ However, these approaches all have drawbacks.</p>
 		  
 		      
 			      <li class="post">
-			        <a href="Realtime_Glass_Rendering.html">Realtime Glass Rendering</a>
+			        <a href="Free_Casonry.html">Free Casonry</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a>
+			        <a href="Rehabilitation_Dream.html">Rehabilitation Dream</a>
 			      </li>
 		     
+		  
+		      
+		  
+		      
 		  
 		      
 		  

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  About me - Radium's Website
+  Technical Solution for PSD2UMG - Radium's Website
   
   </title>
   
@@ -96,7 +96,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		var currentURL = 'index.html';
+		var currentURL = 'Technical_Solution_for_PSD2UMG.html';
 		currentURL = currentURL.substr(0,currentURL.length-5);
 		$('#menu_item_'+currentURL).addClass('is_active');
 	});
@@ -104,22 +104,69 @@
 <div class="row">
 
     <div id="single-page-wrap">
-        <h1>About me</h1>
+        <h1>Technical Solution for PSD2UMG</h1>
 
         <div class="markdown-body post-page">
-        <p>Hi, this is 张镭 ZHANG, Lei.<br />
-How to pronounce my first name &quot;Lei&quot;: &quot;<strong>Lay</strong>&quot;.<br />
-My first name in Chinese (镭) means &quot;Radium&quot;.<br />
-You can either call me  &quot;Radium&quot;.</p>
-<p>I graduated from <a href="https://twin-cities.umn.edu/">University of Minnesota, Twin Cities</a> in 2021 Spring with B.S. in Computer Science and B.S. in Mathematics degrees obtained.</p>
-<p>My focus is on human-computer interaction and machine learning, with the goal of creating an intelligent platform that is driven by user behavior to provide immersive AR/VR scenarios.</p>
-<h4><a id="including-the-following-sub-domains" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Including the following sub-domains:</h4>
+        <p>This document provides a detailed technical solution for implementing the PSD2UMG system, which automates the process of converting Photoshop (PSD) designs into user interfaces (UI) in Unity 3D and Unreal Engine. The following sections outline the core components and steps involved in realizing the PSD2UMG workflow. There are several algorithms implied in this solution, which will be introduced later in other blogs.</p>
+<h2><a id="1-sensory-tree-generation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Sensory Tree Generation</h2>
+<p>To generate a sensory tree from a PSD file, you will need to:</p>
 <ol>
-<li>creating sophisticated models and algorithms to detect physiological signals from various behavioral cues (e.g. voice, facial expressions, language, etc.)</li>
-<li>Using AR/VR/XR technics to create immersive scenarios</li>
-<li>building an intelligent interactive system to guide users through activities</li>
+<li>
+<p><strong>Parse the PSD file</strong>: Use a PSD parsing library (e.g., psd-tools for Python) to extract layer information from the PSD file, including layer names, dimensions, positions, and visibility.<br />
+<img src="media/16836583349803/16836584448128.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>Create tree nodes</strong>: For each layer in the PSD file, create a node that stores the layer's properties, such as its name, dimensions, and position.</p>
+</li>
+<li>
+<p><strong>Establish parent-child relationships</strong>: Analyze the layer hierarchy in the PSD file and establish parent-child relationships between the nodes created in step 2. This can be done by analyzing the layer order, layer groups, and visibility settings.</p>
+</li>
+<li>
+<p><strong>Construct the sensory tree</strong>: Assemble the nodes and their relationships into a tree data structure that represents the hierarchical organization of the PSD design.</p>
+</li>
 </ol>
-<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=1&t=n&d=8BW2EHnziunwGV7nzYznbhp6ov40ptDx5OkSVwNBiEU&co=ffffff&cmo=ffffff&cmn=ffffff&ct=ffffff'></script>
+<h2><a id="2-tree-structure-encoding" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Tree Structure Encoding</h2>
+<p>With the sensory tree generated, you can now encode the tree structure as a string for efficient comparison. One approach is to use a pre-order traversal algorithm:</p>
+<ol>
+<li>
+<p><strong>Pre-order traversal</strong>: Traverse the sensory tree in a pre-order fashion (i.e., visit the parent node first, followed by its children) and create a string representation of the tree structure. You can use special characters to indicate the start and end of each node (e.g., '{' and '}').</p>
+</li>
+<li>
+<p><strong>Node encoding</strong>: For each node in the tree, encode its properties as a string. This can include the node's type, dimensions, position, and other relevant attributes.</p>
+</li>
+<li>
+<p><strong>Concatenate node strings</strong>: Concatenate the encoded node strings generated in step 2 as you traverse the tree. This will create a single string representation of the tree structure, which can be used for efficient comparison.</p>
+</li>
+</ol>
+<h2><a id="3-tree-similarity-calculation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Tree Similarity Calculation</h2>
+<p>To calculate the similarity between two sensory trees, you can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Encode the trees</strong>: Encode the tree structures of both the PSD and the UI using the tree structure encoding method described in the previous section.</p>
+</li>
+<li>
+<p><strong>Compute string similarity</strong>: Calculate the similarity between the encoded tree strings using a suitable string similarity metric, such as the Jaccard index or the Levenshtein distance.<br />
+<img src="media/16836583349803/16836586210157.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>Normalize the similarity score</strong>: Normalize the similarity score to a range of [0, 1], where 0 indicates no similarity and 1 indicates identical tree structures.<br />
+<img src="media/16836583349803/16836585710845.jpg" alt="" /></p>
+</li>
+</ol>
+<h2><a id="4-application-in-unity-and-unreal-engine" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Application in Unity and Unreal Engine</h2>
+<p>To apply the PSD2UMG workflow in Unity 3D and Unreal Engine, you will need to:</p>
+<ol>
+<li>
+<p><strong>Implement the workflow</strong>: Implement the sensory tree generation, tree structure encoding, and tree similarity calculation algorithms in a scripting language supported by the game engine, such as C# for Unity or C++ for Unreal Engine.</p>
+</li>
+<li>
+<p><strong>Create a UI reconstruction tool</strong>: Develop a custom editor tool or plugin for the game engine that takes a PSD file as input and generates a UI component based on the PSD design, using the algorithms implemented in step 1.</p>
+</li>
+<li>
+<p><strong>Integrate with existing UI frameworks</strong>: Integrate the UI reconstruction tool with the game engine's existing UI framework (e.g., Unity's UI system or Unreal Engine's UMG system) to ensure seamless integration with the game development process.</p>
+</li>
+</ol>
+<p>By following these steps, you can implement the PSD2UMG system independently, allowing you to automate the process of converting.</p>
 
         </div>
     </div>
