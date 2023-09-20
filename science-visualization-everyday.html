@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  PSD2UMG - Radium's Website
+  Science Visualization Everyday - Radium's Website
   
   </title>
   
@@ -102,10 +102,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>PSD2UMG</h1>
+          <h1>Science Visualization Everyday</h1>
      
         <div class="read-more clearfix">
-          <span class="date">02/28/2022</span>
+          <span class="date">05/09/2019</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -122,34 +122,48 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p><em>A Novel Solution to Automate UI Reconstruction from Photoshop Design to Unity and Unreal Engine</em></p>
-<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
-<img src="media/16682382868197/16836575736777.jpg"  width="200">
-<img src="media/16682382868197/16836576722270.jpg"  width="200">
+      <h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<p><img src="media/16836638384202/16836640336857.jpg" alt="" /></p>
+<p><img src="media/16836643540209/16836654841685.jpg" alt="" /></p>
 <h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
-<p>PSD2UMG is a comprehensive workflow and toolset designed to streamline the process of converting Photoshop (PSD) designs into user interfaces (UI) in Unity 3D and Unreal Engine. By leveraging advanced algorithms and techniques, PSD2UMG significantly reduces manual labor and increases efficiency in UI reconstruction, enabling game developers to focus more on gameplay and design aspects. This paper presents the rationale, design, and application of PSD2UMG, highlighting its benefits in various stages of the game development process.</p>
-<h2><a id="1-introduction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Introduction</h2>
-<p>The process of reconstructing UIs from Photoshop designs in game engines such as Unity and Unreal Engine has traditionally been time-consuming and labor-intensive. PSD2UMG addresses this issue by providing an automated workflow to convert PSD files into usable UI components in these game engines. The workflow includes three main stages:</p>
+<p>A lightweight communication method for exchanging interactive visual narratives</p>
+<h3><a id="design" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h3>
 <ul>
-<li>Sensory Tree Generation</li>
-<li>Tree Structure Encoding</li>
-<li>Tree Similarity Calculation</li>
+<li>Techniques for creating and exploring interactive lightweight scientific visual narratives</li>
+<li>Techniques for managing and referencing previous visual narratives</li>
 </ul>
-<h2><a id="2-sensory-tree-generation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Sensory Tree Generation</h2>
-<p>Sensory tree generation involves converting a PSD file into a tree structure that represents the design's hierarchical relationships. PSD2UMG's algorithm utilizes layer metadata to generate a sensory tree accurately.</p>
-<h2><a id="3-tree-structure-encoding" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Tree Structure Encoding</h2>
-<p>Inspired by Huffman encoding, PSD2UMG employs tree structure encoding to represent the tree structure as a string. This abstraction allows for efficient comparison of strings, specifically their prefixes, to determine relationships between nodes in the tree.</p>
-<h2><a id="4-tree-similarity-calculation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Tree Similarity Calculation</h2>
-<p>To evaluate the similarity between UI components, PSD2UMG introduces a tree similarity calculation formula. This metric ranges from 0 to 1, providing a quantitative basis for determining the similarity between different UI elements.</p>
-<h2><a id="5-application-of-psd2umg" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Application of PSD2UMG</h2>
-<p>PSD2UMG has been successfully implemented in both Unity 3D and Unreal Engine. The tool offers a simple and efficient way to reconstruct UIs from Photoshop designs, with the entire process taking less than a minute in most cases. This new workflow greatly reduces the manual labor involved in UI reconstruction and allows game developers to focus on other aspects of the development process.</p>
-<h2><a id="6-future-work-and-extensions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Future Work and Extensions</h2>
-<p>Although PSD2UMG cannot be open-sourced due to company confidentiality, a technical solution will be provided for developers to follow through and realize the PSD2UMG system independently. This approach will allow the broader community to benefit from the workflow and techniques presented in PSD2UMG, fostering innovation and efficiency in the game industry ecosystem.</p>
-<p>In conclusion, PSD2UMG presents a novel solution to automate UI reconstruction from Photoshop designs to Unity and Unreal Engine, greatly enhancing efficiency in the game development process. This innovative toolset has the potential to become an invaluable asset for developers, significantly reducing the time and effort required for UI creation and modification.</p>
+<h3><a id="system" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>System</h3>
+<ul>
+<li>Easily integratable underlying communication system
+<ul>
+<li>The system is built on top of emails (no need to set a separate server for this)</li>
+</ul>
+</li>
+<li>A protocol for exchanging interactive visual narratives for scientific visualization (flow and volume visualizations, for now)
+<ul>
+<li>Allows various types of visualization and communication applications to be linked.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>In this project, I worked on various tasks related to science visualization. Some of the key highlights include:</p>
+<ul>
+<li>
+<p><strong>Creating a Video File from the Story</strong>: Initially using the Unity API CameraScreenShot, I encountered limitations in capturing only the desired video content. To overcome this, I devised a solution using a sub-camera that moved along a defined path to capture specific scenes. I merged the captured screenshots into a video using the ffmpeg plugin, resulting in a seamless video presentation.</p>
+</li>
+<li>
+<p><strong>Integrating 360 Images into the Lite Viewer</strong>: I implemented the integration of 360-degree images into a lightweight viewer. By applying UV mapping algorithms, I successfully mapped the panoramic images onto a sphere, enabling an immersive 360-degree viewing experience. User interaction was achieved through smooth rotation using controller or mouse input.</p>
+</li>
+<li>
+<p><strong>Dynamic Annotation Feature</strong>: I implemented a dynamic annotation feature within the viewer. By utilizing a raycaster and mouse clicks, users could place annotations on specific points of interest in the visualization. The annotations were visually rendered using a separate shader, ensuring independence from the scene.</p>
+</li>
+<li>
+<p><strong>Additional Engineering Development Skills</strong>: In addition to the graphics-related tasks, I also developed various engineering skills. This included integrating Google APIs for uploading and downloading visualization metadata on Google Drive, implementing a listener for drag-and-drop functionality in the viewer across different platforms, and more.</p>
+</li>
+</ul>
 <h2><a id="more-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Details</h2>
 <ul>
-<li><a href="Technical_Solution_for_PSD2UMG.html">Technical Solution for PSD2UMG</a></li>
-<li><a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a></li>
+<li><a href="Technical_Solution_for_Everyday_Science_Visualization.html">Technical Solution for Everyday Science Visualization</a></li>
 </ul>
 
 
@@ -161,16 +175,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="audio-visualization.html" 
-          title="Previous Post: Audio Visualization">&laquo; Audio Visualization</a>
+          <a href="package-delivery-via-drone.html" 
+          title="Previous Post: Package Delivery via Drone">&laquo; Package Delivery via Drone</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="free-casonry.html" 
-          title="Next Post: Free Casonry">Free Casonry &raquo;</a>
       
       </p>
         </div>
