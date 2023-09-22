@@ -1,0 +1,543 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Package Delivery via Drone - Radium's Website
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Radium's Website" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="resume.html">Resume</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Radium's Website</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="resume.html">Resume</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="Portfolios.html">Portfolios</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Package Delivery via Drone</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">12/21/2020</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2><a id="highlighted-technical-skills-and-design-aspects" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Highlighted Technical Skills and Design Aspects</h2>
+<ol>
+<li><strong>Algorithm Design and Comparison</strong>: designed and compared the Dijkstra and ant algorithms.</li>
+<li><strong>Mathematical Modeling</strong>: established a mathematical model of path optimization.</li>
+<li><strong>Environment Analysis and Modeling</strong>:analyzed the drone flight environment and established an environment model based on the Voronoi diagram.</li>
+<li><strong>Experimental Design</strong>: using real map data and creating control groups to test the algorithms.</li>
+<li><strong>Web Server Visualization</strong>: visualized the results through a web server creating a map of the school area.</li>
+</ol>
+<h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+<p>In this project, I explored two different methods of using drones for package delivery: the refueling point model and the vehicle-drone composite delivery model. I focused on the latter, where I designed and compared different algorithms to find the most efficient route for drone deliveries. Through various scenarios, I found that while both the informed and uninformed algorithms have their pros and cons, the ant algorithm generally offers wider applicability.<br />
+<img src="media/16836624440621/16948293470333.jpg" alt="" /></p>
+<h2><a id="introduction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+<p>Online shopping has become a part of our daily lives, and it is supported by numerous algorithms that help in the delivery process, replacing human effort to a large extent. In this research, I delved into finding the most efficient algorithm for drone package delivery, a futuristic approach to solving the common vehicle routing problem. This problem involves determining the best routes for a set number of vehicles to deliver or collect packages, aiming to save time and effort. I explored different heuristic algorithms to find approximate optimal solutions for this problem, setting the stage for drone package delivery solutions.</p>
+<h2><a id="existing-solutions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Existing Solutions</h2>
+<ol>
+<li>
+<p>Refueling Point Model<br />
+In the early stages of drone delivery development, researchers focused on how to extend the drone's coverage area and efficiency by establishing suitable refueling points. This approach involved creating mobile refueling methods and optimizing the location of these points to enhance the drone's continuous support capability. The researchers also looked into coordinating multiple drone distribution tasks and optimizing task allocation during emergency supply deliveries in disaster relief scenarios.</p>
+</li>
+<li>
+<p>Vehicle-Drone Joint Delivery Model<br />
+A more recent approach involves combining drones with traditional delivery vehicles, using the latter as mobile drone bases. This model has been defined and explored through various problems and algorithms, aiming to find the most efficient solutions for different delivery scenarios. The researchers have developed heuristic algorithms, dynamic programming methods, and even genetic algorithms to solve complex task allocation problems in this model, focusing on minimizing delivery time and costs.</p>
+</li>
+</ol>
+<h2><a id="my-solution" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>My Solution</h2>
+<p>In my project, I chose to work with the vehicle-drone joint delivery model. I assumed that all packages to be delivered are already at the package center in each city. The drones either pick up packages from customers and drop them at these centers or are scheduled to deliver packages from the centers to customers. My focus was on finding the shortest drone delivery path within a city, disregarding inter-city routes. I adopted two main algorithms for this: the Dijkstra algorithm, which follows a greedy strategy to find the shortest path between points, and the ant algorithm, which uses a path optimization model to find the best route through a series of iterative steps.</p>
+<h3><a id="approach-description" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Approach Description</h3>
+<h4><a id="dijkstra-algorithm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dijkstra Algorithm</h4>
+<p>This algorithm operates on a principle of finding the shortest path from a starting point to various vertices in a graph. Initially, it assigns a path weight of zero to the origin and sets distances to other reachable vertices accordingly. The algorithm iteratively finds the shortest path to various points by comparing distances and updating them if a shorter path is found through a newly added vertex. Despite its efficiency in finding the shortest paths, it doesn't consider other costs and environmental changes.</p>
+<h4><a id="ant-algorithm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ant Algorithm</h4>
+<p>In contrast, the ant algorithm is designed to find an optimal path through a series of iterative steps that involve establishing a mathematical model of path optimization. This approach involves analyzing the drone flight environment and establishing an environment model based on the Voronoi diagram. The algorithm calculates the costs associated with various paths considering different threat levels and other parameters. It then uses an ant colony algorithm to plan the initial path for drones, considering pheromone concentrations and heuristic information on different paths. The algorithm undergoes several iterations to find the shortest path, with a provision for smoothing the initial path to achieve coordination.</p>
+<h3><a id="experiment-design" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Experiment Design</h3>
+<p>For the experiment, I used map data of the Minneapolis and Saint Paul campuses of the University of Minnesota, dividing them into two control groups to represent different delivery distances. I kept the customer and package information constant to maintain the credibility of the experiment and ran each algorithm three times to find an average answer. The performance of the algorithms was measured based on their running time and the length of the path they found, with the results visualized through a web server creating a map of the school area.</p>
+<h3><a id="analysis" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analysis</h3>
+<p>In this section, I analyzed the results obtained from the experiments conducted using the Dijkstra and ant algorithms. I observed that the Dijkstra algorithm generally found shorter paths compared to the ant algorithm. However, the ant algorithm was more efficient in terms of running time, showcasing its potential in real-time applications where quick decisions are essential.</p>
+<p>I also noted that the ant algorithm could find paths that avoid high-threat areas, making it a safer option for drone deliveries. This algorithm also showed a high degree of adaptability, adjusting to changes in the environment more effectively than the Dijkstra algorithm.</p>
+<h2><a id="conclusionsummary-and-future-work" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion/Summary and Future Work</h2>
+<p>In conclusion, my research project brought to light the potential of using drones for package delivery, focusing on finding the most efficient routes within a city. Through a detailed study of the Dijkstra and ant algorithms, I found that while the Dijkstra algorithm can find shorter paths, the ant algorithm stands out in terms of safety and adaptability, offering a promising avenue for future developments in drone delivery systems.</p>
+<p>Looking ahead, I plan to further refine the ant algorithm to enhance its efficiency and to explore the integration of other heuristic algorithms to find even more optimal solutions. I also envision expanding this research to include inter-city routes, aiming to build a more comprehensive drone delivery network that can revolutionize the logistics and delivery industry.</p>
+<h2><a id="appendix" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Appendix</h2>
+<p><a href="https://radiumlzhang.github.io/Package_Delivery_via_Drone.pdf">Package Delivery via Drone</a></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="16699957214552.html" 
+          title="Previous Post: Reinforcement Learning - Flappy Bird">&laquo; Reinforcement Learning - Flappy Bird</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="Science_Visualization_Everyday.html" 
+          title="Next Post: Science Visualization Everyday">Science Visualization Everyday &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://raw.githubusercontent.com/RadiumLZhang/RadiumLZhang.github.io/main/profile/20221024203511.jpg" /></div>
+            
+                <h1>Radium's Website</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+<a target="_blank" class="linkedin" href="https://www.linkedin.com/in/radium-lei-zhang" title="LinkedIn">LinkedIn</a>
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/RadiumLZhang" title="GitHub">GitHub</a>
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="Portfolios.html"><strong>Portfolios</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="Glass_Material_Rendering.html">Glass Material Rendering</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="Audio%20Visualization.html">Audio Visualization</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="PSD2UMG.html">PSD2UMG</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="Free_Casonry.html">Free Casonry</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="Rehabilitation_Dream.html">Rehabilitation Dream</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>
