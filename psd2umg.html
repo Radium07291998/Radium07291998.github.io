@@ -1,0 +1,531 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  PSD2UMG - Radium's Website
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Radium's Website" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="resume.html">Resume</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Radium's Website</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="resume.html">Resume</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="Portfolios.html">Portfolios</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>PSD2UMG</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">02/28/2022</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='Portfolios.html'>Portfolios</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p><em>A Novel Solution to Automate UI Reconstruction from Photoshop Design to Unity and Unreal Engine</em></p>
+<h2><a id="demo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<img src="media/16682382868197/16836575736777.jpg"  width="200">
+<img src="media/16682382868197/16836576722270.jpg"  width="200">
+<h2><a id="abstract" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abstract</h2>
+<p>PSD2UMG is a comprehensive workflow and toolset designed to streamline the process of converting Photoshop (PSD) designs into user interfaces (UI) in Unity 3D and Unreal Engine. By leveraging advanced algorithms and techniques, PSD2UMG significantly reduces manual labor and increases efficiency in UI reconstruction, enabling game developers to focus more on gameplay and design aspects. This paper presents the rationale, design, and application of PSD2UMG, highlighting its benefits in various stages of the game development process.</p>
+<h2><a id="1-introduction" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Introduction</h2>
+<p>The process of reconstructing UIs from Photoshop designs in game engines such as Unity and Unreal Engine has traditionally been time-consuming and labor-intensive. PSD2UMG addresses this issue by providing an automated workflow to convert PSD files into usable UI components in these game engines. The workflow includes three main stages:</p>
+<ul>
+<li>Sensory Tree Generation</li>
+<li>Tree Structure Encoding</li>
+<li>Tree Similarity Calculation</li>
+</ul>
+<h2><a id="2-sensory-tree-generation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Sensory Tree Generation</h2>
+<p>Sensory tree generation involves converting a PSD file into a tree structure that represents the design's hierarchical relationships. PSD2UMG's algorithm utilizes layer metadata to generate a sensory tree accurately.</p>
+<h2><a id="3-tree-structure-encoding" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Tree Structure Encoding</h2>
+<p>Inspired by Huffman encoding, PSD2UMG employs tree structure encoding to represent the tree structure as a string. This abstraction allows for efficient comparison of strings, specifically their prefixes, to determine relationships between nodes in the tree.</p>
+<h2><a id="4-tree-similarity-calculation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Tree Similarity Calculation</h2>
+<p>To evaluate the similarity between UI components, PSD2UMG introduces a tree similarity calculation formula. This metric ranges from 0 to 1, providing a quantitative basis for determining the similarity between different UI elements.</p>
+<h2><a id="5-application-of-psd2umg" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Application of PSD2UMG</h2>
+<p>PSD2UMG has been successfully implemented in both Unity 3D and Unreal Engine. The tool offers a simple and efficient way to reconstruct UIs from Photoshop designs, with the entire process taking less than a minute in most cases. This new workflow greatly reduces the manual labor involved in UI reconstruction and allows game developers to focus on other aspects of the development process.</p>
+<h2><a id="6-future-work-and-extensions" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Future Work and Extensions</h2>
+<p>Although PSD2UMG cannot be open-sourced due to company confidentiality, a technical solution will be provided for developers to follow through and realize the PSD2UMG system independently. This approach will allow the broader community to benefit from the workflow and techniques presented in PSD2UMG, fostering innovation and efficiency in the game industry ecosystem.</p>
+<p>In conclusion, PSD2UMG presents a novel solution to automate UI reconstruction from Photoshop designs to Unity and Unreal Engine, greatly enhancing efficiency in the game development process. This innovative toolset has the potential to become an invaluable asset for developers, significantly reducing the time and effort required for UI creation and modification.</p>
+<h2><a id="more-details" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Details</h2>
+<ul>
+<li><a href="Technical_Solution_for_PSD2UMG.html">Technical Solution for PSD2UMG</a></li>
+<li><a href="Photoshop_Layer_Normalization_Tool.html">Photoshop Layer Normalization Tool</a></li>
+</ul>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="audio-visualization.html" 
+          title="Previous Post: Audio Visualization">&laquo; Audio Visualization</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="free-casonry.html" 
+          title="Next Post: Free Casonry">Free Casonry &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://raw.githubusercontent.com/RadiumLZhang/RadiumLZhang.github.io/main/profile/20221024203511.jpg" /></div>
+            
+                <h1>Radium's Website</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+<a target="_blank" class="linkedin" href="https://www.linkedin.com/in/radium-lei-zhang" title="LinkedIn">LinkedIn</a>
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/RadiumLZhang" title="GitHub">GitHub</a>
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="Portfolios.html"><strong>Portfolios</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="glass-material-rendering.html">Glass Material Rendering</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="audio-visualization.html">Audio Visualization</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="psd2umg.html">PSD2UMG</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="free-casonry.html">Free Casonry</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="rehabilitation-dream.html">Rehabilitation Dream</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>
