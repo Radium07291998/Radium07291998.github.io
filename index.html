@@ -105,15 +105,14 @@
         <h1>About me</h1>
 
         <div class="markdown-body post-page">
-        <h4><a id="pronunciation-guide" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pronunciation Guide:</h4>
-<p>My first name, &quot;Lei&quot;, is pronounced like &quot;Lay&quot;. The Chinese character for my name, 镭, translates to &quot;Radium&quot;. Feel free to address me as &quot;Radium&quot;!</p>
-<h4><a id="educational-background" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Educational Background:</h4>
-<p>I proudly hold dual B.S. degrees in Computer Science and Mathematics from the esteemed University of Minnesota, Twin Cities, which I earned in Spring 2021.</p>
-<p>I'm currently pursuing an M.S. in Computer Science and an M.S. in Quantitative Computational Finance at the renowned Georgia Institute of Technology. I'm gearing up for graduation in May 2025.</p>
-<h4><a id="career-aspirations" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Career Aspirations:</h4>
-<p>I'm on the lookout for exciting summer internship opportunities for 2024. If you're seeking a passionate and dedicated intern, I'd love to connect!</p>
-<h4><a id="discover-more" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Discover More:</h4>
-<p>Dive deeper into my professional journey by exploring my resume and portfolio available in the other tabs.</p>
+        <h3><a id="pronunciation-guide" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pronunciation Guide</h3>
+<p>Hello! My first name, &quot;Lei,&quot; is pronounced like &quot;Lay.&quot; The Chinese character for my name, 镭, translates to &quot;Radium,&quot; so feel free to call me Radium!</p>
+<h3><a id="educational-background" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Educational Background</h3>
+<p>I hold dual B.S. degrees in Computer Science and Mathematics from the University of Minnesota, Twin Cities, which I proudly earned in Spring 2021. Currently, I'm pursuing my M.S. in Computer Science at the Georgia Institute of Technology, with graduation set for May 2025.</p>
+<h3><a id="career-aspirations" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Career Aspirations</h3>
+<p>I’m actively seeking an internship opportunity for Winter 2024 and exploring new graduate roles for 2025. If you're looking for a passionate and dedicated candidate, I'd love to connect with you!</p>
+<h3><a id="discover-more" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Discover More</h3>
+<p>Feel free to explore my resume and portfolio in the other tabs to learn more about my professional journey.</p>
 <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=1&t=n&d=8BW2EHnziunwGV7nzYznbhp6ov40ptDx5OkSVwNBiEU&co=ffffff&cmo=ffffff&cmn=ffffff&ct=ffffff'></script>
 
         </div>
@@ -131,22 +130,89 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
       </div>
     </div>
 
+<style>.mweb-charts{background:#fff;}
+body{ box-sizing: border-box;
+    margin: 0 auto;}
+@media print{
+    pre, code, pre code {
+     overflow: visible !important;
+     white-space: pre-wrap !important;       /* css-3 */
+     white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+     white-space: -pre-wrap !important;      /* Opera 4-6 */
+     white-space: -o-pre-wrap !important;    /* Opera 7 */
+     word-wrap: break-word !important;       /* Internet Explorer 5.5+ */
+    }
+    html,body{margin:0;padding:4px;}
+}
 
 
-  
 
+div.code-toolbar {
+  position: relative;
+}
 
+div.code-toolbar > .toolbar {
+  position: absolute;
+  z-index: 10;
+  top: .3em;
+  right: .2em;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
 
+div.code-toolbar:hover > .toolbar {
+  opacity: 1;
+}
 
+/* Separate line b/c rules are thrown out if selector is invalid.
+   IE11 and old Edge versions don't support :focus-within. */
+div.code-toolbar:focus-within > .toolbar {
+  opacity: 1;
+}
 
+div.code-toolbar > .toolbar > .toolbar-item {
+  display: inline-block;
+}
 
+div.code-toolbar > .toolbar > .toolbar-item > a {
+  cursor: pointer;
+}
 
+div.code-toolbar > .toolbar > .toolbar-item > button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-user-select: none; /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 
+div.code-toolbar > .toolbar > .toolbar-item > a,
+div.code-toolbar > .toolbar > .toolbar-item > button,
+div.code-toolbar > .toolbar > .toolbar-item > span {
+  color: inherit;
+  font-size: .8em;
+  padding: 4px .5em;
+  background: #f5f2f0;
+  background: rgba(224, 224, 224, 0.4);
+  box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
+  border-radius: .5em;
+}
 
-
-
-
-
+div.code-toolbar > .toolbar > .toolbar-item > a:hover,
+div.code-toolbar > .toolbar > .toolbar-item > a:focus,
+div.code-toolbar > .toolbar > .toolbar-item > button:hover,
+div.code-toolbar > .toolbar > .toolbar-item > button:focus,
+div.code-toolbar > .toolbar > .toolbar-item > span:hover,
+div.code-toolbar > .toolbar > .toolbar-item > span:focus {
+  color: inherit;
+  text-decoration: none;
+}
+</style>
 
 <style type="text/css">
 figure{margin: 0;padding: 0;}
